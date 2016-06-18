@@ -1,8 +1,7 @@
 # Cellosaurus API
 
 The [Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. 
-A detailed content description of Cellosaurus can be found [here](http://web.expasy.org/cellosaurus/description.html). 
-Cellosaurus currently provides text/obo files to make their data publicly available, and can be found [here](ftp://ftp.expasy.org/databases/cellosaurus).
+A detailed content description of Cellosaurus can be found [here](http://web.expasy.org/cellosaurus/description.html). Cellosaurus currently provides text/obo files to make their data publicly available, and can be found [here](http://web.expasy.org/cellosaurus/).
 
 **cellosaurus-api** was built to make this data more accessible, making it more convenient to build applications or integrate
 Cellosaurus data. All outputs are currently in `JSON` format.
