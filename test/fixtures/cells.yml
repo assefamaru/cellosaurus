@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyString
+  ac: MyString
+  sy: MyString
+  dr: MyString
+  rx: MyString
+  ww: MyString
+  cc: MyString
+  st: MyString
+  di: MyString
+  ox: MyString
+  hi: MyString
+  oi: MyString
+  sx: MyString
+  ca: MyString
+
+two:
+  id: MyString
+  ac: MyString
+  sy: MyString
+  dr: MyString
+  rx: MyString
+  ww: MyString
+  cc: MyString
+  st: MyString
+  di: MyString
+  ox: MyString
+  hi: MyString
+  oi: MyString
+  sx: MyString
+  ca: MyString
