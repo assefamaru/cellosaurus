@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   scope '/api' do
     scope '/v1' do
-      scope '/cells' do 
-        get '/' => 'api#index'
+      scope '/cell_lines' do
+        scope '/all' do
+          get '/' => 'api#index'
+        end
         scope '/:attribute' do 
           get '/' => 'api#show'
         end
