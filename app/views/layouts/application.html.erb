@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>CellosaurusApi</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<!-- META
+============================================ -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= full_title(yield(:title)) %></title>
+<meta name="author" content="Alexander Maru">
+<meta name="description" content="">
+<!-- FAVICON
+============================================ -->
+<%= favicon_link_tag '#', rel: 'icon' %>
+<!-- SOCIAL DATA
+============================================ -->
+<meta property="og:title" content="Cellosaurus API">
+<meta property="og:description" content="">
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cellosaurus API">
+<meta name="twitter:description" content="">
+<meta name="twitter:creator" content="">
+<meta name="twitter:domain" content="">
+<meta name="twitter:site" content="">
+<meta name="twitter:image" content="">
+<!-- STYLESHEETS
+============================================ -->
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<!-- JAVASCRIPT
+============================================ -->
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+<%= render 'layouts/shim' %>
 </head>
 <body>
-
 <%= yield %>
-
 </body>
 </html>
