@@ -1,6 +1,6 @@
 require 'csv'
 
-#=begin
+=begin
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'cellosaurus.csv'))
 csv = CSV.parse(csv_text, :headers => true)
@@ -23,6 +23,6 @@ csv.each do |row|
   t.save
 end
 
-#=end
+=end
 
 puts "There are now [ #{Cell.count} ] rows in the [ cells ] table"
