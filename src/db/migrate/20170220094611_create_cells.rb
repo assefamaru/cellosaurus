@@ -1,8 +1,8 @@
 class CreateCells < ActiveRecord::Migration[5.0]
   def change
     create_table :cells do |t|
-      t.text :identifier
-      t.text :accession
+      t.string :identifier
+      t.string :accession
       t.text :as
       t.text :sy
       t.text :dr
