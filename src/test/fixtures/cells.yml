@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyText
+  ac: MyText
+  as: MyText
+  sy: MyText
+  dr: MyText
+  rx: MyText
+  ww: MyText
+  cc: MyText
+  st: MyText
+  di: MyText
+  ox: MyText
+  hi: MyText
+  oi: MyText
+  sx: MyText
+  ca: MyText
+
+two:
+  id: MyText
+  ac: MyText
+  as: MyText
+  sy: MyText
+  dr: MyText
+  rx: MyText
+  ww: MyText
+  cc: MyText
+  st: MyText
+  di: MyText
+  ox: MyText
+  hi: MyText
+  oi: MyText
+  sx: MyText
+  ca: MyText
