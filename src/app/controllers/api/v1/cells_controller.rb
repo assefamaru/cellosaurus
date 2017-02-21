@@ -1,9 +1,9 @@
 module Api::V1
   class CellsController < ApiController
-    before_action :set_cell
+    before_action :set_cell, only: [:show, :get_accession, :get_synonyms]
 
     require 'json'
-
+    
     def show
       if @cell.present?
         @cell = @cell.first
