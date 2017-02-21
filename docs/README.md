@@ -108,4 +108,4 @@ To contribute, fork this repository, make updates/edits and submit a pull reques
 
 ## License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see [LICENSE](../LICENSE) for details.
