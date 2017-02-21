@@ -1,12 +1,12 @@
 # Cellosaurus API
 
-[Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines that attempts to describe all cell lines used in biomedical research. 
+[Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research. 
 
 This API aims to make the data provided by Cellosaurus as integrable as possible. 
 
 ## Accessing the API
 
-All calls should be made to the following URL, adding required parameters/endpoints for specific services.
+All calls are made to the following URL, adding required parameters/endpoints for specific services.
 
 ```
 http://cellosaurus.pharmacodb.com/v1/
@@ -18,7 +18,7 @@ Returned data is in `json` format.
 
 * **/cell_lines/{id}**
 
-The `/cell_lines/{id}` returns the cell line with either its `identifier = id` or `accession = id` or `synonyms include id`. The returned data will have the following structure:
+`/cell_lines/{id}` returns the cell line with either its `identifier = id` or `accession = id` or `synonyms include id`. The returned data will have the following structure:
 
 ```json
 {
@@ -42,7 +42,6 @@ The `/cell_lines/{id}` returns the cell line with either its `identifier = id` o
 			"database": "value",
 			"accession": "value"
 		},
-		...
 	],
 	"reference-identifier": [
 		"values"
@@ -55,7 +54,6 @@ The `/cell_lines/{id}` returns the cell line with either its `identifier = id` o
 			"category": "value",
 			"comment": "value"
 		},
-		...
 	],
 	"str-profile-data": {
 		"sources": [
@@ -66,7 +64,6 @@ The `/cell_lines/{id}` returns the cell line with either its `identifier = id` o
 				"id": "value",
 				"alleles": "value"
 			},
-			...
 		]
 	},
 	"diseases": [
@@ -75,7 +72,6 @@ The `/cell_lines/{id}` returns the cell line with either its `identifier = id` o
 			"accession": "value",
 			"disease": "value"
 		},
-		...
 	],
 	"hierarchy": [
 		{
@@ -83,7 +79,6 @@ The `/cell_lines/{id}` returns the cell line with either its `identifier = id` o
 			"accession": "value",
 			"derived-from": "value"
 		},
-		...
 	],
 	"same-origin-as": [
 		{
@@ -100,3 +95,7 @@ The `/cell_lines/{id}` returns the cell line with either its `identifier = id` o
 ## Contributing
 
 Fork repo, make updates and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
