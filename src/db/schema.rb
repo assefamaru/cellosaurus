@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220094611) do
+ActiveRecord::Schema.define(version: 20170221180938) do
 
   create_table "cells", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "identifier"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20170220094611) do
     t.datetime "updated_at",               null: false
     t.index ["accession"], name: "index_cells_on_accession", using: :btree
     t.index ["identifier"], name: "index_cells_on_identifier", using: :btree
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "api_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
