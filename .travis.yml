@@ -8,3 +8,4 @@ script:
 cache: bundler
 services:
   - mysql
+before_script: cd src
