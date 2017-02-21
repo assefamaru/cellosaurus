@@ -4,7 +4,6 @@ rvm:
 before_install: cd src
 bundler_args: --jobs=1
 script:
-script:
   - bundle exec rake db:setup
 cache: bundler
 services:
