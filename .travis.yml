@@ -2,3 +2,10 @@ language: ruby
 rvm:
 - 2.4.0
 before_install: cd src
+bundler_args: --jobs=1
+script:
+script:
+  - bundle exec rake db:setup
+cache: bundler
+services:
+  - mysql
