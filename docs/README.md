@@ -14,11 +14,15 @@ http://cellosaurus.pharmacodb.com/v1/
 
 Returned data is in `json` format.
 
+A valid [API Key](API_KEY.md) is required in order to make an API call.
+
 ## Endpoints
 
 * **/cell_lines/{id}**
+* **/cell_lines/{id}/get_accession**
+* **/cell_lines/{id}/get_synonyms**
 
-`/cell_lines/{id}` returns the cell line with either its `identifier = id` or `accession = id` or `synonyms include id`. The returned data will have the following structure:
+`/cell_lines/{id}` returns the cell line with either its `identifier = id` or `accession = id` or `synonym = id`. The returned data will have the following structure:
 
 ```json
 {
@@ -32,11 +36,13 @@ Returned data is in `json` format.
 	"synonyms": [
 		"values"
 	],
-	"species-of-origin": {
-		"terminology": "value",
-		"accession": "value",
-		"species": "value"
-	},
+	"species-of-origin": [
+		{
+			"terminology": "value",
+			"accession": "value",
+			"species": "value"
+		},
+	],
 	"cross-references": [
 		{
 			"database": "value",
@@ -90,12 +96,16 @@ Returned data is in `json` format.
 }
 ```
 
-`value` is either a `string` or `null`.
+`value` is either a `string` or `null`. See [Cellosaurus](http://web.expasy.org/cellosaurus/) for more information on each field.
+
+`/cell_lines/{id}/get_accession` returns the accession id associated to the queried cell line (if cell line exists in db).
+
+`/cell_lines/{id}/get_synonyms` returns an array of synonyms listed under the cell line being queried.
 
 ## Contributing
 
-Fork repo, make updates and submit a pull request.
+To contribute, fork this repository, make updates/edits and submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
