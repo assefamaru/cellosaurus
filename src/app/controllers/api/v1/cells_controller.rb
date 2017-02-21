@@ -182,7 +182,7 @@ module Api::V1
 			unless @cell.present?
 				@cell = Cell.where(identifier: params[:id])
 				unless @cell.present?
-					@cell = Cell.where("sy LIKE ?", "%#{params[:id]}%")
+					@cell = Cell.where("sy LIKE ? or sy LIKE ? or sy LIKE ? or sy LIKE ?", "#{params[:id]}", "#{params[:id]}; %", "%; #{params[:id]};%", "%; #{params[:id]}")
 				end
 			end
 
