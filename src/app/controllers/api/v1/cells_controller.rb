@@ -156,6 +156,28 @@ module Api::V1
       end
     end
 
+    def get_accession
+      if @cell.present?
+        @accession = @cell.first.accession
+        render json: @accession
+      else
+        render json: "error: cell line not found"
+      end
+    end
+
+    def get_synonyms
+      if @cell.present?
+        @synonyms = []
+        if @cell.first.sy.present?
+          @synonyms = @cell.first.sy.split("; ")
+        end
+        @synonyms << @cell.first.identifier
+        render json: @synonyms.uniq
+      else
+        render json: "error: cell line not found"
+      end
+    end
+
     private
 
       def set_cell
