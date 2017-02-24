@@ -175,12 +175,14 @@ module Api::V1
 		end
 
 		def get_data
+			@accession = @cell.accession
+
 			@synonyms = [ @cell.identifier ]
 			if @cell.sy.present?
 				@synonyms += @cell.sy.split("; ")
 			end
 
-			@data = [@synonyms.uniq]
+			@data = [@accession, @synonyms.uniq]
 			@diseases = @cell.di
 			@data << @diseases
 			
