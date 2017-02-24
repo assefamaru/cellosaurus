@@ -174,6 +174,19 @@ module Api::V1
 			render json: @synonyms.uniq
 		end
 
+		def get_data
+			@synonyms = [ @cell.identifier ]
+			if @cell.sy.present?
+				@synonyms += @cell.sy.split("; ")
+			end
+
+			@data = [@synonyms.uniq]
+			@diseases = @cell.di
+			@data << @diseases
+			
+			render json: @data
+		end
+
 		private
 
 		def set_cell

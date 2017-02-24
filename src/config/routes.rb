@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 			get '/cell_lines/:id'               => 'cells#show'
 			get '/cell_lines/:id/get_accession' => 'cells#get_accession'
 			get '/cell_lines/:id/get_synonyms'  => 'cells#get_synonyms'
+			get '/cell_lines/:id/get_data'      => 'cells#get_data'
 		end
 	end
 	
