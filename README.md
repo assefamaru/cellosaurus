@@ -1,8 +1,8 @@
-# Cellosaurus API [![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api)
+# Cellosaurus API [![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api) [![GitHub version](https://badge.fury.io/gh/assefamaru%2Fcellosaurus-api.svg)](https://badge.fury.io/gh/assefamaru%2Fcellosaurus-api)
 
-[Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research. 
+[Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research.
 
-This API aims to make the data provided by Cellosaurus as integrable as possible. 
+This API aims to make the data provided by Cellosaurus as integrable as possible.
 
 ## Accessing the API
 
