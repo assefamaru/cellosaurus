@@ -1,4 +1,6 @@
-# Cellosaurus API [![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api) [![GitHub version](https://badge.fury.io/gh/assefamaru%2Fcellosaurus-api.svg)](https://badge.fury.io/gh/assefamaru%2Fcellosaurus-api)
+# Cellosaurus API
+
+[![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api) [![MIT License](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php) [![GitHub version](https://badge.fury.io/gh/assefamaru%2Fcellosaurus-api.svg)](https://badge.fury.io/gh/assefamaru%2Fcellosaurus-api) [![Issue Count](https://codeclimate.com/github/assefamaru/cellosaurus-api/badges/issue_count.svg)](https://codeclimate.com/github/assefamaru/cellosaurus-api)
 
 [Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research.
 
@@ -9,7 +11,7 @@ This API aims to make the data provided by Cellosaurus as integrable as possible
 All calls are made to the following URL, adding required parameters/endpoints for specific services.
 
 ```
-http://cellosaurus.pharmacodb.com/v1/
+https://cellosaurus-api.herokuapp.com/v1/cell_lines/
 ```
 
 Returned data is in `json` format.
