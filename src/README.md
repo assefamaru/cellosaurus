@@ -11,14 +11,96 @@ This API aims to make the data provided by Cellosaurus as integrable as possible
 All calls are made to the following URL, adding required parameters/endpoints for specific services.
 
 ```
-https://cellosaurus-api.herokuapp.com/v1/cell_lines/
+http://cellosaurus.pharmacodb.com/v1
 ```
 
 Returned data is in `json` format.
 
 ## Endpoints
 
-* **`/cell_lines/{id}`**
+* **/cell_lines/{id}**
+* **/cell_lines/{id}/get_accession**
+* **/cell_lines/{id}/get_synonyms**
+
+`/cell_lines/{id}` returns the cell line whose `identifier = id` or `accession = id` or `synonym = id`. The returned data will have the following structure:
+
+```json
+{
+	"category": "value",
+	"sex": "value",
+	"identifier": "value",
+	"accession": {
+		"primary": "value",
+		"secondary": "value"
+	},
+	"synonyms": [
+		"values"
+	],
+	"species-of-origin": [
+		{
+			"terminology": "value",
+			"accession": "value",
+			"species": "value"
+		},
+	],
+	"cross-references": [
+		{
+			"database": "value",
+			"accession": "value"
+		},
+	],
+	"reference-identifier": [
+		"values"
+	],
+	"web-pages": [
+		"values"
+	],
+	"comments": [
+		{
+			"category": "value",
+			"comment": "value"
+		},
+	],
+	"str-profile-data": {
+		"sources": [
+			"values"
+		],
+		"markers": [
+			{
+				"id": "value",
+				"alleles": "value"
+			},
+		]
+	},
+	"diseases": [
+		{
+			"terminology": "value",
+			"accession": "value",
+			"disease": "value"
+		},
+	],
+	"hierarchy": [
+		{
+			"terminology": "value",
+			"accession": "value",
+			"derived-from": "value"
+		},
+	],
+	"same-origin-as": [
+		{
+			"terminology": "value",
+			"accession": "value",
+			"identifier": "value"
+		}
+	]
+}
+```
+
+`value` is either a `string` or `null`. See [Cellosaurus](http://web.expasy.org/cellosaurus/) for more information on each field.
+
+`/cell_lines/{id}/get_accession` returns the accession id associated with the queried cell line (if cell line exists in db).
+
+`/cell_lines/{id}/get_synonyms` returns an array of synonyms listed under the cell line being queried.
 
 ## Contributing
 
