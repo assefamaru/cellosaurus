@@ -16,13 +16,10 @@ func main() {
 
 	v1 := router.Group("/v1")
 	{
-		router.GET("/", func(c *gin.Context) {
-			message := "Welcome to Cellosaurus API, see: https://github.com/assefamaru/cellosaurus-api"
-			c.String(http.StatusOK, message)
-		})
+		v1.GET("/", APIVersionEndpoint)
 
-		v1.GET("/cell_lines", func(c *gin.Context) {})
-		v1.GET("/cell_lines/:id", func(c *gin.Context) {})
+		v1.GET("/cell_lines/", IndexCell)
+		v1.GET("/cell_lines/:id", IndexCell)
 	}
 
 	router.NoRoute(func(c *gin.Context) {
