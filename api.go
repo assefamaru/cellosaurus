@@ -19,7 +19,7 @@ func main() {
 		v1.GET("/", APIVersionEndpoint)
 
 		v1.GET("/cell_lines/", IndexCell)
-		v1.GET("/cell_lines/:id", IndexCell)
+		v1.GET("/cell_lines/:id", ShowCell)
 	}
 
 	router.NoRoute(func(c *gin.Context) {
