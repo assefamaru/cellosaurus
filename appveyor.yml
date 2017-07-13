@@ -33,7 +33,7 @@ deploy:
   description: 'App release.'
   provider: GitHub
   auth_token:
-    secure: FW3tJ3fMncxvs58/ifSP7w+kBl9BlxvRMr9liHmnBs14ALRG8Vfyol+sNhj9u2JA
+    secure: b21a0dc7831fbf85ed1c930b9b812ce03675242a
   artifact: binary
   draft: false
   prerelease: false
