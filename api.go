@@ -17,7 +17,6 @@ func main() {
 	v1 := router.Group("/v1")
 	{
 		v1.GET("/", APIVersionEndpoint)
-
 		v1.GET("/cell_lines/", IndexCell)
 		v1.GET("/cell_lines/:id", ShowCell)
 	}
