@@ -1,8 +1,8 @@
 # Cellosaurus API
 
 [![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/assefamaru/cellosaurus-api/blob/master/LICENSE)
 [![Build status](https://ci.appveyor.com/api/projects/status/ssw9ljftsj3pbom5?svg=true)](https://ci.appveyor.com/project/assefamaru/cellosaurus-api)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/assefamaru/cellosaurus-api/blob/master/LICENSE)
 
 [Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research.
 
