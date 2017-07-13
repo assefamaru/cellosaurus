@@ -15,6 +15,9 @@ install:
   - echo %PATH%
   - echo %GOPATH%
   - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+  - go get github.com/gin-gonic/gin
+  - go get github.com/getsentry/raven-go
+  - go get github.com/go-sql-driver/mysql
   - go version
   - go env
 
