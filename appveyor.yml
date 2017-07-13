@@ -28,14 +28,14 @@ artifacts:
   - path: buildOutput/cellosaurus-api
     name: binary
 
-deploy:
-  release: cellosaurus-api-$(appveyor_build_version)
-  description: 'App release.'
-  provider: GitHub
-  auth_token:
-    secure: 9JT+MI5Kjnq5P+FvftW8HTX0WCAHdlZiJq1u/CcwAr4FQ2in685k+/paHO36QTcW
-  artifact: binary
-  draft: false
-  prerelease: false
-  on:
-    branch: master
+# deploy:
+#   release: cellosaurus-api-$(appveyor_build_version)
+#   description: 'App release.'
+#   provider: GitHub
+#   auth_token:
+#     secure: 9JT+MI5Kjnq5P+FvftW8HTX0WCAHdlZiJq1u/CcwAr4FQ2in685k+/paHO36QTcW
+#   artifact: binary
+#   draft: false
+#   prerelease: false
+#   on:
+#     branch: master
