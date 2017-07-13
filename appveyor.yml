@@ -21,9 +21,6 @@ install:
 build_script:
   - go build -o buildOutput\myapp -i .
 
-build_script:
-  - ps: .\build.ps1
-
 artifacts:
   - path: buildOutput/myapp
     name: binary
