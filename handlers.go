@@ -19,7 +19,10 @@ func init() {
 
 // Prepare database abstraction for later use.
 func initDB() (*sql.DB, error) {
-	cred := os.Getenv("mysql_user") + ":" + os.Getenv("mysql_passwd") + "@tcp(127.0.0.1:3306)/cellosaurus"
+	user := os.Getenv("mysql_user")
+	passwd := os.Getenv("mysql_passwd")
+	mysqlDB := os.Getenv("mysql_cellosaurus_db")
+	cred := user + ":" + passwd + "@tcp(127.0.0.1:3306)/" + mysqlDB
 	db, err := sql.Open("mysql", cred)
 	if err != nil {
 		raven.CaptureError(err, nil)
