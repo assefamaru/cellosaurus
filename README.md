@@ -13,7 +13,7 @@ This API aims to make the data provided by Cellosaurus as integrable as possible
 All calls are made to the following URL, adding required parameters/endpoints for specific services.
 
 ```
-https://cellosaurus.herokuapp.com/v1/
+http://cellosaurus.pharmacodb.com/
 ```
 
 Returned data is in `json` format.
