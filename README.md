@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api)
 [![Build status](https://ci.appveyor.com/api/projects/status/ssw9ljftsj3pbom5?svg=true)](https://ci.appveyor.com/project/assefamaru/cellosaurus-api)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/assefamaru/cellosaurus-api/blob/master/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/assefamaru/cellosaurus-api)](https://goreportcard.com/report/github.com/assefamaru/cellosaurus-api)
 
 [Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research.
 
