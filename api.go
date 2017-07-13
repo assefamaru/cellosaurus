@@ -9,6 +9,8 @@ import (
 func main() {
 	router := gin.Default()
 
+	router.StaticFile("/favicon.ico", "./lib/favicon.ico")
+
 	router.GET("/", func(c *gin.Context) {
 		message := "Welcome to Cellosaurus API, see: https://github.com/assefamaru/cellosaurus-api"
 		c.String(http.StatusOK, message)
