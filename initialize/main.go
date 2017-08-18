@@ -17,7 +17,7 @@ func main() {
 
 	// Flags
 	flag.BoolVar(&getModeFromEnv, "emode", false, "use MODE environment variable")
-	flag.BoolVar(&getPortFromEnv, "eport", true, "use PORT environment variable")
+	flag.BoolVar(&getPortFromEnv, "eport", false, "use PORT environment variable")
 	flag.BoolVar(&getVersionFromEnv, "eversion", false, "use VERSION environment variable")
 	flag.StringVar(&ctx.Mode, "mode", "release", "environment mode")
 	flag.StringVar(&ctx.Port, "port", "8080", "server port")
