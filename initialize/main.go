@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/assefamaru/cellosaurus"
+	"github.com/assefamaru/cellosaurus-api"
 )
 
 func main() {
