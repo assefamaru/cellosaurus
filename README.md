@@ -1,6 +1,6 @@
 # Cellosaurus Restful API
 
-[![Build Status](https://travis-ci.org/assefamaru/cellosaurus.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus)
+[![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api)
 [![Build status](https://ci.appveyor.com/api/projects/status/os3kne9qkch7mils?svg=true)](https://ci.appveyor.com/project/assefamaru/cellosaurus)
 [![GoDoc](https://godoc.org/github.com/assefamaru/cellosaurus?status.svg)](https://godoc.org/github.com/assefamaru/cellosaurus)
 
