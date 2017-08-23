@@ -1,5 +1,9 @@
 # Cellosaurus Restful API
 
+[![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api)
+[![Build status](https://ci.appveyor.com/api/projects/status/ssw9ljftsj3pbom5?svg=true)](https://ci.appveyor.com/project/assefamaru/cellosaurus-api)
+[![GoDoc](https://godoc.org/github.com/assefamaru/cellosaurus-api?status.svg)](https://godoc.org/github.com/assefamaru/cellosaurus-api)
+
 [Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research.
 
 This API aims to make the data provided by Cellosaurus as integrable as possible, by enabling programmatic access to the full database.
