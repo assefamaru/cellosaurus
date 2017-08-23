@@ -306,6 +306,6 @@ func (cell *Cell) Find(id string, typ string) error {
 // RootHandler handles root endpoints.
 func RootHandler(c *gin.Context) {
 	w := "Welcome to Cellosaurus API. "
-	m := "For more details, see: https://github.com/assefamaru/cellosaurus-api."
+	m := "For more details, see: https://github.com/assefamaru/cellosaurus."
 	c.String(http.StatusOK, w+m)
 }
