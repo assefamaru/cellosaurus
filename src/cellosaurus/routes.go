@@ -24,8 +24,8 @@ type Route struct {
 type Routes []Route
 
 var routes = Routes{
-	Route{GET, "/cell_lines", TestFunc},
-	Route{GET, "/cell_lines/:id", TestFunc},
+	Route{GET, "/cell_lines", IndexCells},
+	Route{GET, "/cell_lines/:id", ShowCell},
 	Route{GET, "/search", TestFunc},
-	Route{GET, "/search/:id", TestFunc},
+	Route{GET, "/search/:id", SearchCell},
 }
