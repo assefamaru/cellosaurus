@@ -93,7 +93,7 @@ func SearchCell(c *gin.Context) {
 	}
 }
 
-// TestFunc ...
-func TestFunc(c *gin.Context) {
+// Greetings ...
+func Greetings(c *gin.Context) {
 	c.String(http.StatusOK, "Welcome to Cellosaurus API!")
 }
