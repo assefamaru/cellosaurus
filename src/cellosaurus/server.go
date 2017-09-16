@@ -21,11 +21,11 @@ func Init(ctx *Context) {
 	router := gin.Default()
 
 	// Handle root route
-	router.GET("/")
+	router.GET("/", TestFunc)
 
 	// Handle api routes
 	api := router.Group("/api")
-	api.GET("/")
+	api.GET("/", TestFunc)
 	for _, route := range routes {
 		api.Handle(route.Method, route.Endpoint, route.Handler)
 	}
