@@ -30,7 +30,8 @@ func Init(ctx *Context) {
 	router.GET("/", HomePage)
 
 	// Handle api routes
-	v1 := router.Group("/v1")
+	api := router.Group("/api")
+	v1 := api.Group("/v1")
 	for _, route := range routes {
 		v1.Handle(route.Method, route.Endpoint, route.Handler)
 	}
