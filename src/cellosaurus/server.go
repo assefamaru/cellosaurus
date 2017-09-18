@@ -25,6 +25,7 @@ func Init(ctx *Context) {
 	// Static resources
 	router.StaticFile("/styles.css", "./src/cellosaurus/public/styles.css")
 	router.StaticFile("/favicon.ico", "./src/cellosaurus/public/favicon.ico")
+	router.StaticFile("/capi20170918.png", "./src/cellosaurus/public/capi20170918.png")
 
 	// Handle root route
 	router.GET("/", HomePage)
