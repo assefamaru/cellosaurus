@@ -20,9 +20,9 @@ https://cellosaur.us/api/v1/
 
 The following endpoints are currently supported.
 
-* `GET` [/cell_lines](#Endpoints)
-* `GET` [/cell_lines/{id}](#Endpoints)
-* `GET` [/search/{id}](#Endpoints)
+* `GET` **[/cell_lines](#Endpoints)**
+* `GET` **[/cell_lines/{id}](#Endpoints)**
+* `GET` **[/search/{id}](#Endpoints)**
 
 ## Parameters
 
@@ -32,7 +32,9 @@ The following endpoints are currently supported.
 | **/cell_lines/{id}** | indent, type | https://cellosaur.us/api/v1/cell_lines/mcf-7?type=identifier |
 | **/search/{id}** | indent | https://cellosaur.us/api/v1/search/mcf-7?indent=false |
 
-A cell line can be searched using its `identifier`, `accession id`, or its `synonym names`. For example, the cell line **mcf-7** has the following attributes:
+A cell line can be searched using its `identifier`, `accession id`, or its `synonym names`.
+
+For example, the cell line **mcf-7** has the following attributes:
 
 | Identifier | Accession_ID | Synonyms |
 | :--- | :--- | :--- |
@@ -55,7 +57,7 @@ GET /search/ssMCF7
 All responses are in `json` format.
 
 | Status Code | Status Message | Description |
-| :--- | :--- | :--- |
+| :---: | :--- | :--- |
 | 200 | Status OK | Normal response with no errors |
 | 400 | Bad Request | The request URL is not supported by the API |
 | 404 | Not Found | The requested resource was not found |
@@ -63,7 +65,7 @@ All responses are in `json` format.
 
 ## Contributing
 
-You can offer suggestions, request new features, or report any erros by creating a [new](https://github.com/assefamaru/cellosaurus-api/issues/new) issue and assigning it an appropriate label.
+You can offer suggestions, request new features, or report any errors by creating a [new](https://github.com/assefamaru/cellosaurus-api/issues/new) issue and assigning it an appropriate label.
 
 ## License
 
