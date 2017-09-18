@@ -30,7 +30,7 @@ func (cells *Cells) List() error {
 	if err != nil {
 		return err
 	}
-	rows, err := db.Query("SELECT identifier, accession, `as` FROM cells;")
+	rows, err := db.Query("SELECT identifier, accession, `as` FROM cellosaurus;")
 	defer rows.Close()
 	if err != nil {
 		LogSentry(err)
@@ -56,7 +56,7 @@ func (cells *Cells) ListPaginated(page int, limit int) error {
 		return err
 	}
 	s := (page - 1) * limit
-	rows, err := db.Query(fmt.Sprintf("SELECT identifier, accession, `as` FROM cells LIMIT %d,%d;", s, limit))
+	rows, err := db.Query(fmt.Sprintf("SELECT identifier, accession, `as` FROM cellosaurus LIMIT %d,%d;", s, limit))
 	defer rows.Close()
 	if err != nil {
 		LogSentry(err)
@@ -97,7 +97,7 @@ func (cell *Cell) Find(id string, typ string) error {
 		return err
 	}
 
-	SQL := "SELECT identifier, accession, `as`, ca, sx, sy, dr, rx, ww, cc, di, hi, ox, oi, st FROM cells"
+	SQL := "SELECT identifier, accession, `as`, ca, sx, sy, dr, rx, ww, cc, di, hi, ox, oi, st FROM cellosaurus"
 	if typ == "accession" || typ == "identifier" {
 		query = fmt.Sprintf("%s WHERE %s = '%s';", SQL, typ, id)
 	} else if typ == "synonym" {
