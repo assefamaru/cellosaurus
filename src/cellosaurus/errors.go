@@ -19,28 +19,33 @@ func LogSentry(err error) {
 
 // BadRequest responds with error status code 400, Bad Request.
 func BadRequest(c *gin.Context) {
-	err := gin.H{
-		"error":   "Bad Request",
-		"message": "No routers match the request URL: https://cellosaur.us" + c.Request.URL.Path,
-	}
-	c.JSON(http.StatusBadRequest, err)
+	message := "Bad Request. No routers match the request URL: https://cellosaur.us" + c.Request.URL.Path
+	c.IndentedJSON(http.StatusBadRequest, gin.H{
+		"error": gin.H{
+			"status":  http.StatusBadRequest,
+			"message": message,
+		},
+	})
 }
 
 // NotFound responds with error status code 404, Not Found.
 func NotFound(c *gin.Context) {
-	err := gin.H{
-		"error":   "Not Found",
-		"message": "The requested URI: https://cellosaur.us" + c.Request.URL.Path + " does not represent any resource on server",
-	}
-	c.JSON(http.StatusNotFound, err)
+	message := "Not Found. The requested URI: https://cellosaur.us" + c.Request.URL.Path + " does not represent any resource on server"
+	c.IndentedJSON(http.StatusNotFound, gin.H{
+		"error": gin.H{
+			"status":  http.StatusNotFound,
+			"message": message,
+		},
+	})
 }
 
 // InternalServerError responds with error status code 500, Internal Server Error.
 func InternalServerError(c *gin.Context) {
-	err := gin.H{
-		"error":      "Internal Server Error",
-		"message":    "An internal error has occurred in server, and steps are being taken to resolve issue.",
-		"suggestion": "Try making the request after a few hours. If error persists, open an issue on github.",
-	}
-	c.JSON(http.StatusInternalServerError, err)
+	c.IndentedJSON(http.StatusInternalServerError, gin.H{
+		"error": gin.H{
+			"status":     http.StatusInternalServerError,
+			"message":    "Internal Server Error",
+			"suggestion": "Retry request after a few hours. If error persists, open an issue on github.",
+		},
+	})
 }

@@ -20,14 +20,19 @@ func Init(ctx *Context) {
 	// Gin router with default middleware: logger and recovery
 	router := gin.Default()
 
+	router.LoadHTMLGlob("./src/cellosaurus/public/*")
+
+	// Static resources
+	router.StaticFile("/styles.css", "./src/cellosaurus/public/styles.css")
+	router.StaticFile("/favicon.ico", "./src/cellosaurus/public/favicon.ico")
+
 	// Handle root route
-	router.GET("/", Greetings)
+	router.GET("/", HomePage)
 
 	// Handle api routes
-	api := router.Group("/api")
-	api.GET("/", Greetings)
+	v1 := router.Group("/v1")
 	for _, route := range routes {
-		api.Handle(route.Method, route.Endpoint, route.Handler)
+		v1.Handle(route.Method, route.Endpoint, route.Handler)
 	}
 
 	// If no routers match the request url,
