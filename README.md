@@ -1,1 +1,1 @@
-# Cellosaurus Rest API
+# Cellosaurus API
