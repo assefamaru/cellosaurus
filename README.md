@@ -22,12 +22,12 @@ All response is in `json` format.
 
 The following endpoints are currently supported.
 
-* [ GET ] **[/cell_lines](#)**
-* [ GET ] **[/cell_lines/{id}](#)**
-* [ GET ] **[/search/{id}](#)**
+* GET **[/cell_lines](#)**
+* GET **[/cell_lines/{id}](#)**
+* GET **[/search/{id}](#)**
 
 | Endpoints | Parameters | Examples |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `/cell_lines` | `page`, `per_page`, `all`, `indent`, `include` | https://cellosaur.us/api/v1/cell_lines?page=2&per_page=10 |
 | `/cell_lines/{id}` | `indent`, `type` | https://cellosaur.us/api/v1/cell_lines/mcf-7?type=identifier |
 | `/search/{id}` | `indent` | https://cellosaur.us/api/v1/search/mcf-7?indent=false |
@@ -35,7 +35,7 @@ The following endpoints are currently supported.
 A cell line can be searched using its `identifier`, `accession id`, or its `synonym names`. For example, the cell line **mcf-7** has the following attributes:
 
 | Identifier | Accession ID | Synonyms |
-| --- | --- | --- |
+| :--- | :------------ | :--- |
 | MCF-7 | CVCL_0031 | "MCF 7", "MCF.7", "MCF7", "Michigan Cancer Foundation-7", "ssMCF-7", "ssMCF7", "MCF7/WT", "IBMF-7", "MCF7-CTRL" |
 
 So, in order to look up this cell line, request options look like the following:
@@ -55,7 +55,7 @@ GET /search/ssMCF7
 All responses are in `json` format.
 
 | Status Code | Status Message | Description |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | 200 | Status OK | Normal response with no errors |
 | 400 | Bad Request | The request URL is not supported by the API |
 | 404 | Not Found | The requested resource was not found |
