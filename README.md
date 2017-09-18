@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api)
 [![Build status](https://ci.appveyor.com/api/projects/status/ssw9ljftsj3pbom5?svg=true)](https://ci.appveyor.com/project/assefamaru/cellosaurus-api)
-[![GoDoc](https://godoc.org/github.com/assefamaru/cellosaurus-api?status.svg)](https://godoc.org/github.com/assefamaru/cellosaurus-api)
+[![GoDoc](https://godoc.org/github.com/assefamaru/cellosaurus-api/src/cellosaurus?status.svg)](https://godoc.org/github.com/assefamaru/cellosaurus-api/src/cellosaurus)
 
 [Cellosaurus](http://web.expasy.org/cellosaurus/) is a knowledge resource on cell lines. It attempts to describe all cell lines used in biomedical research.
 
@@ -16,15 +16,15 @@ All calls are made to the following URL, adding required endpoints for specific 
 https://cellosaur.us/api/v1/
 ```
 
-All response is in `json` format.
-
 ## Endpoints
 
 The following endpoints are currently supported.
 
-* GET **[/cell_lines](#)**
-* GET **[/cell_lines/{id}](#)**
-* GET **[/search/{id}](#)**
+* GET [/cell_lines](#Endpoints)
+* GET [/cell_lines/{id}](#Endpoints)
+* GET [/search/{id}](#Endpoints)
+
+## Parameters
 
 | Endpoints | Parameters | Examples |
 | :--- | :--- | :--- |
@@ -40,8 +40,8 @@ A cell line can be searched using its `identifier`, `accession id`, or its `syno
 
 So, in order to look up this cell line, request options look like the following:
 
-```
-GET /cell_lines/CVCL_0031                --> Adding '?type=accession' not neccessary, Accession is used for default lookup
+```http
+GET /cell_lines/CVCL_0031                # Accession ID used by default
 GET /cell_lines/mcf-7?type=identifier
 GET /cell_lines/ssMCF7?type=synonym
 
