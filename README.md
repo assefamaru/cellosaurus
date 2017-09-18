@@ -34,14 +34,14 @@ The following endpoints are currently supported.
 
 A cell line can be searched using its `identifier`, `accession id`, or its `synonym names`. For example, the cell line **mcf-7** has the following attributes:
 
-| Identifier | Accession ID | Synonyms |
-| :--- | :------------------- | :--- |
+| Identifier | Accession_ID | Synonyms |
+| :--- | :--- | :--- |
 | MCF-7 | CVCL_0031 | "MCF 7", "MCF.7", "MCF7", "Michigan Cancer Foundation-7", "ssMCF-7", "ssMCF7", "MCF7/WT", "IBMF-7", "MCF7-CTRL" |
 
 So, in order to look up this cell line, request options look like the following:
 
 ```
-GET /cell_lines/CVCL_0031
+GET /cell_lines/CVCL_0031                --> Adding '?type=accession' not neccessary, Accession is used for default lookup
 GET /cell_lines/mcf-7?type=identifier
 GET /cell_lines/ssMCF7?type=synonym
 
