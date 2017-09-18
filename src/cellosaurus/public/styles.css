@@ -1,0 +1,182 @@
+/* Universal */
+
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+    font-size: 62.5%;
+}
+
+a {
+    color: #823DD0;
+}
+
+a:hover {
+    color: #41405D;
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: 0px 1px 20px 0px rgba(238,238,238,1);
+    -moz-box-shadow: 0px 1px 20px 0px rgba(238,238,238,1);
+    box-shadow: 0px 1px 20px 0px rgba(238,238,238,1);
+}
+
+#hdr-wrapper {
+    width: calc(100% - 40px);
+    max-width: 1000px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+#site-name {
+    float: left;
+    height: 80px;
+}
+
+#site-name a {
+    display: block;
+    line-height: 80px;
+    color: #823DD0;
+    text-decoration: none;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+
+#github-link {
+    float: right;
+    height: 80px;
+}
+
+#github-link a {
+    line-height: 80px;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #282A2E;
+    text-decoration: none;
+}
+
+/* Body */
+
+#hero {
+    width: 100%;
+    height: calc(100vh - 150px);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#hero-content {
+    width: 100%;
+    margin: 0;
+    padding: 100px 0;
+}
+
+#hero-content h1 {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    font-size: 3rem;
+    color: #373B41;
+    padding: 0 20px;
+}
+
+#hero-content h1 a {
+    color: #823DD0;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+#hero-content h2 {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #282A2E;
+    padding: 0 20px;
+}
+
+#hero-btn {
+    display: block;
+    background-color: #823DD0;
+    color: #FFFFFF;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 1.2rem;
+    text-decoration: none;
+    width: 250px;
+    padding: 20px;
+    margin: 100px auto auto auto;
+    left: 0;
+    right: 0;
+    border-radius: 2px;
+}
+
+#hero-btn:hover {
+    background-color: #41405D;
+}
+
+/* Footer */
+
+footer {
+    width: 100%;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+small {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 69px;
+    border-top: 1px solid #EEEEEE;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    color: #282A2E;
+    display: block;
+    font-size: .9rem;
+
+}
+
+small a {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+/* Sizing */
+
+@media screen and (max-width: 400px) {
+    #site-name a {
+        font-size: 1.1rem !important;
+    }
+    #github-link {
+        display: none !important;
+    }
+    #hero-content {
+        padding: 50px 0 !important;
+    }
+    #hero-content h1 {
+        font-size: 1.5rem !important;
+    }
+    #hero-content h2 {
+        font-size: 1.2rem !important;
+    }
+    #hero-btn {
+        width: 200px !important;
+        font-size: 1rem !important;
+    }
+}

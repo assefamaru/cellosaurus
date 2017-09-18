@@ -15,7 +15,7 @@ func IndexCells(c *gin.Context) {
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	limit, _ := strconv.Atoi(c.DefaultQuery("per_page", "30"))
 	all, _ := strconv.ParseBool(c.DefaultQuery("all", "false"))
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 	include := c.Query("include")
 	if all {
 		err := cells.List()
@@ -45,7 +45,7 @@ func IndexCells(c *gin.Context) {
 // Handles GET requests for /cell_lines/{id}.
 func ShowCell(c *gin.Context) {
 	var cell Cell
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 	typ := c.DefaultQuery("type", "accession")
 	id := c.Param("id")
 	err := cell.Find(id, typ)
@@ -65,7 +65,7 @@ func ShowCell(c *gin.Context) {
 // SearchCell finds a cell line using either accession, identifier, or synonyms.
 func SearchCell(c *gin.Context) {
 	var cell Cell
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 	id := c.Param("id")
 	err := cell.Find(id, "accession")
 	if err == nil {
@@ -93,7 +93,9 @@ func SearchCell(c *gin.Context) {
 	}
 }
 
-// Greetings ...
-func Greetings(c *gin.Context) {
-	c.String(http.StatusOK, "Welcome to Cellosaurus API!")
+// HomePage renders home page html for root route.
+func HomePage(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"title": "Cellosaurus API",
+	})
 }
