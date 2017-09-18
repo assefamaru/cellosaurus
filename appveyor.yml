@@ -6,7 +6,7 @@ branches:
   only:
     - master
 
-clone_folder: c:\gopath\src\github.com\assefamaru\cellosaurus
+clone_folder: c:\gopath\src\github.com\assefamaru\cellosaurus-api
 
 environment:
   GOPATH: c:\gopath
@@ -22,8 +22,8 @@ install:
   - go env
 
 build_script:
-  - go build -o buildOutput\cellosaurus -i .
+  - go build -o buildOutput\cellosaurus-api -i .
 
 artifacts:
-  - path: buildOutput/cellosaurus
+  - path: buildOutput/cellosaurus-api
     name: binary
