@@ -20,23 +20,23 @@ https://cellosaur.us/api/v1/
 
 The following endpoints are currently supported.
 
-* GET [/cell_lines](#Endpoints)
-* GET [/cell_lines/{id}](#Endpoints)
-* GET [/search/{id}](#Endpoints)
+* `GET` [/cell_lines](#Endpoints)
+* `GET` [/cell_lines/{id}](#Endpoints)
+* `GET` [/search/{id}](#Endpoints)
 
 ## Parameters
 
 | Endpoints | Parameters | Examples |
 | :--- | :--- | :--- |
-| `/cell_lines` | `page`, `per_page`, `all`, `indent`, `include` | https://cellosaur.us/api/v1/cell_lines?page=2&per_page=10 |
-| `/cell_lines/{id}` | `indent`, `type` | https://cellosaur.us/api/v1/cell_lines/mcf-7?type=identifier |
-| `/search/{id}` | `indent` | https://cellosaur.us/api/v1/search/mcf-7?indent=false |
+| **/cell_lines** | page, per_page, all, indent, include | https://cellosaur.us/api/v1/cell_lines?page=2&per_page=10 |
+| **/cell_lines/{id}** | indent, type | https://cellosaur.us/api/v1/cell_lines/mcf-7?type=identifier |
+| **/search/{id}** | indent | https://cellosaur.us/api/v1/search/mcf-7?indent=false |
 
 A cell line can be searched using its `identifier`, `accession id`, or its `synonym names`. For example, the cell line **mcf-7** has the following attributes:
 
 | Identifier | Accession_ID | Synonyms |
 | :--- | :--- | :--- |
-| MCF-7 | CVCL_0031 | "MCF 7", "MCF.7", "MCF7", "Michigan Cancer Foundation-7", "ssMCF-7", "ssMCF7", "MCF7/WT", "IBMF-7", "MCF7-CTRL" |
+| MCF-7 | CVCL_0031 | MCF 7, MCF.7, MCF7, Michigan Cancer Foundation-7, ssMCF-7, ssMCF7, MCF7/WT, IBMF-7, MCF7-CTRL |
 
 So, in order to look up this cell line, request options look like the following:
 
