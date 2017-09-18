@@ -31,7 +31,7 @@ func IndexCells(c *gin.Context) {
 			InternalServerError(c)
 			return
 		}
-		total, err := Count("cells")
+		total, err := Count("cellosaurus")
 		if err != nil {
 			InternalServerError(c)
 			return
