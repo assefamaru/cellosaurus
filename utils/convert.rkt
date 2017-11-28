@@ -83,10 +83,11 @@
   (close-input-port in))
 
 ;; --- Uncomment below to convert .txt to .csv
-;; --- "cell_lines.csv" output will contain unique cell lines,
+;; --- "cells.csv" output will contain unique cell lines,
 ;;      each with their identifier and accession attributes only.
 ;; --- "attributes.csv" ouput will contain each attribute type and attribute content
 ;;      for a cell line (referenced using accession).
-;; (convert "cellosaurus.txt" "cell_lines.csv" "cell_lines")
+;; --- "references.csv" output will contain reference data for each reference identifier
+;; (convert "cellosaurus.txt" "cells.csv" "cell_lines")
 ;; (convert "cellosaurus.txt" "attributes.csv" "attributes")
 ;; (convert "cellosaurus_refs.txt" "references.csv" "references")
