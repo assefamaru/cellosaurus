@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/assefamaru/cellosaurus-api/src/cellosaurus"
+	cellosaurus "github.com/assefamaru/cellosaurus-api/src"
 )
 
 func main() {
@@ -18,5 +18,5 @@ func main() {
 	}
 
 	// Init server
-	cellosaurus.Init(&c)
+	cellosaurus.Init(c)
 }

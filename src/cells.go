@@ -1,6 +1,9 @@
 package cellosaurus
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 // Cell is a cell line model.
 type Cell struct {
@@ -13,20 +16,25 @@ type Cells []Cell
 
 // Count returns the total number of cell line records in database.
 func Count() (int, error) {
-	var count int
+	var (
+		count string
+		total int
+	)
 
 	db, err := Database()
 	defer db.Close()
 	if err != nil {
-		return count, err
+		return total, err
 	}
 
-	err = db.QueryRow("SELECT COUNT(*) FROM cells;").Scan(&count)
+	err = db.QueryRow("SELECT content FROM stats where attribute = 'total';").Scan(&count)
 	if err != nil {
 		logSentry(err)
+		return total, err
 	}
 
-	return count, err
+	total, _ = strconv.Atoi(count)
+	return total, nil
 }
 
 // List returns a list of paginated cell lines.
