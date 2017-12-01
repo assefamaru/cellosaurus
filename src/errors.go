@@ -20,6 +20,23 @@ func logSentry(err error) {
 // BadRequest responds with error status code 400, Bad Request.
 func BadRequest(c *gin.Context) {
 	m := "No routers match the request URL - https://api.cellosaur.us" + c.Request.URL.Path
-	err := gin.H{"error": gin.H{"code": http.StatusBadRequest, "status": "Bad Request", "message": m}}
+	err := gin.H{"error": gin.H{"code": http.StatusBadRequest,
+		"status": "Bad Request", "message": m}}
 	c.JSON(http.StatusBadRequest, err)
+}
+
+// NotFound responds with error status code 404, Not Found.
+func NotFound(c *gin.Context) {
+	m := "The requested URI - https://api.cellosaur.us" + c.Request.URL.Path + " - does not match any resource."
+	err := gin.H{"error": gin.H{"code": http.StatusNotFound,
+		"status": "Not Found", "message": m}}
+	c.JSON(http.StatusNotFound, err)
+}
+
+// InternalServerError responds with error status code 500, Internal Server Error.
+func InternalServerError(c *gin.Context) {
+	m := "Retry request. If error persists, open an issue on github."
+	err := gin.H{"error": gin.H{"code": http.StatusInternalServerError,
+		"status": "Internal Server Error", "message": m}}
+	c.JSON(http.StatusInternalServerError, err)
 }
