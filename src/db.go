@@ -3,6 +3,8 @@ package cellosaurus
 import (
 	"database/sql"
 	"fmt"
+	"log"
+	"os"
 
 	// go mysql driver
 	_ "github.com/go-sql-driver/mysql"
@@ -26,6 +28,23 @@ type mysqlConfig struct {
 }
 
 var mysqlConf mysqlConfig
+
+// SetMysqlConf updates mysqlConf using environment variables.
+func SetMysqlConf() {
+	if mysqlConf.Username = os.Getenv("cellosaurus_user"); mysqlConf.Username == "" {
+		log.Fatal("cellosaurus_user environment variable must be set")
+	}
+	if mysqlConf.Password = os.Getenv("cellosaurus_pass"); mysqlConf.Password == "" {
+		log.Fatal("cellosaurus_pass environment variable must be set")
+	}
+	if mysqlConf.Database = os.Getenv("cellosaurus_db"); mysqlConf.Database == "" {
+		log.Fatal("cellosaurus_db environment variable must be set")
+	}
+	if mysqlConf.Host = os.Getenv("cellosaurus_host"); mysqlConf.Host == "" {
+		log.Fatal("cellosaurus_host environment variable must be set")
+	}
+	mysqlConf.Port = "3306"
+}
 
 // dataSourceName returns a connection string suitable for sql.Open.
 func (c mysqlConfig) dataSourceName() string {
