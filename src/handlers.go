@@ -17,6 +17,17 @@ func ReleaseInfo(c *gin.Context) {
 	Render(c, indent, rel)
 }
 
+// ListTerminologies returns a list of terminologies used in database.
+func ListTerminologies(c *gin.Context) {
+	var terms Terminologies
+	if err := terms.List(); err != nil {
+		InternalServerError(c)
+		return
+	}
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	Render(c, indent, terms)
+}
+
 // ListCells handles GET requests for /cell-lines.
 // func ListCells(c *gin.Context) {
 // 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))

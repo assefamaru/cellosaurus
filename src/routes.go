@@ -25,5 +25,6 @@ type Routes []Route
 
 var routes = Routes{
 	Route{GET, "/release", ReleaseInfo},
+	Route{GET, "/terminologies", ListTerminologies},
 	// Route{GET, "/cell-lines", ListCells},
 }

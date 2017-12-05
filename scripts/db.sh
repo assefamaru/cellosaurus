@@ -16,13 +16,27 @@ USE $database;
 
 # ==============================================================================
 
-CREATE TABLE rel_info(
+CREATE TABLE releaseInfo(
     id INT AUTO_INCREMENT primary key NOT NULL,
     attribute VARCHAR(255) NOT NULL,
     content VARCHAR(255) NOT NULL
 );
 
-LOAD DATA LOCAL INFILE '../data/csv/rel_info.csv' INTO TABLE rel_info
+LOAD DATA LOCAL INFILE '../data/csv/releaseInfo.csv' INTO TABLE releaseInfo
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+IGNORE 1 LINES;
+
+# ==============================================================================
+
+CREATE TABLE terminologies(
+    id INT AUTO_INCREMENT primary key NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    source VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL
+);
+
+LOAD DATA LOCAL INFILE '../data/csv/terminologies.csv' INTO TABLE terminologies
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 IGNORE 1 LINES;
 
@@ -70,18 +84,6 @@ IGNORE 1 LINES;
 # );
 #
 # LOAD DATA LOCAL INFILE '../data/csv/refs.csv' INTO TABLE refs
-# FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-# IGNORE 1 LINES;
-
-# ==============================================================================
-
-# CREATE TABLE stats(
-#     id INT AUTO_INCREMENT primary key NOT NULL,
-#     attribute VARCHAR(100) NOT NULL,
-#     content VARCHAR(100) NOT NULL
-# );
-#
-# LOAD DATA LOCAL INFILE '../data/csv/stats.csv' INTO TABLE stats
 # FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 # IGNORE 1 LINES;
 
