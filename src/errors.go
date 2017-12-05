@@ -17,26 +17,47 @@ func logSentry(err error) {
 	raven.CaptureError(err, nil)
 }
 
+// Error is a custom error structure.
+type Error struct {
+	Code    int    `json:"code"`
+	Status  string `json:"status"`
+	Message string `json:"message"`
+}
+
+// renderError renders a custom error.
+func renderError(c *gin.Context, indent bool, err Error) {
+	if indent {
+		c.IndentedJSON(err.Code, gin.H{"error": err})
+	} else {
+		c.JSON(err.Code, gin.H{"error": err})
+	}
+}
+
 // BadRequest responds with error status code 400, Bad Request.
 func BadRequest(c *gin.Context) {
-	m := "No routers match the request URL - https://api.cellosaur.us" + c.Request.URL.Path
-	err := gin.H{"error": gin.H{"code": http.StatusBadRequest,
-		"status": "Bad Request", "message": m}}
-	c.JSON(http.StatusBadRequest, err)
+	var err Error
+	err.Code = http.StatusBadRequest
+	err.Status = "Bad Request"
+	err.Message = "No routers match the request URL - https://api.cellosaur.us" + c.Request.URL.Path
+	renderError(c, false, err)
 }
 
 // NotFound responds with error status code 404, Not Found.
 func NotFound(c *gin.Context) {
-	m := "The requested URI - https://api.cellosaur.us" + c.Request.URL.Path + " - does not match any resource."
-	err := gin.H{"error": gin.H{"code": http.StatusNotFound,
-		"status": "Not Found", "message": m}}
-	c.JSON(http.StatusNotFound, err)
+	var err Error
+	err.Code = http.StatusNotFound
+	err.Status = "Not Found"
+	m := "The requested URI - https://api.cellosaur.us" + c.Request.URL.Path
+	n := " - does not match any resource in database."
+	err.Message = m + n
+	renderError(c, false, err)
 }
 
 // InternalServerError responds with error status code 500, Internal Server Error.
 func InternalServerError(c *gin.Context) {
-	m := "Retry request. If error persists, open an issue on github."
-	err := gin.H{"error": gin.H{"code": http.StatusInternalServerError,
-		"status": "Internal Server Error", "message": m}}
-	c.JSON(http.StatusInternalServerError, err)
+	var err Error
+	err.Code = http.StatusInternalServerError
+	err.Status = "Internal Server Error"
+	err.Message = "Retry request. If error persists, open an issue on github."
+	renderError(c, false, err)
 }
