@@ -1,60 +1,92 @@
 #!/bin/bash
 
 # Read user and password interactively.
-read -p "User: " user
-read -s -p "Password: " password
+read -p "Database name (database will be created using this name): " database
+read -p "MySQL User: " user
+read -s -p "MySQL Password: " password
 echo
 
 # Create database and tables.
 # Then load tables with csv data.
 mysql -u "$user" -p"$password" <<EOF
-DROP DATABASE IF EXISTS cellosaurus_api;
-CREATE DATABASE cellosaurus_api;
+DROP DATABASE IF EXISTS $database;
+CREATE DATABASE $database;
 
-USE cellosaurus_api;
+USE $database;
+
+# ==============================================================================
+
+CREATE TABLE rel_info(
+    id INT AUTO_INCREMENT primary key NOT NULL,
+    attribute VARCHAR(255) NOT NULL,
+    content VARCHAR(255) NOT NULL
+);
+
+LOAD DATA LOCAL INFILE '../data/csv/rel_info.csv' INTO TABLE rel_info
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+IGNORE 1 LINES;
+
+# ==============================================================================
 
 CREATE TABLE cells(
-    accession VARCHAR(20) primary key NOT NULL,
-    identifier VARCHAR(255) NOT NULL,
-    INDEX identifier (identifier)
-);
-
-CREATE TABLE attributes(
-    id INT AUTO_INCREMENT primary key NOT NULL,
-    accession VARCHAR(20) NOT NULL,
-    attribute VARCHAR(60) NOT NULL,
-    content VARCHAR(1000) NOT NULL,
-    FOREIGN KEY (accession) REFERENCES cells(accession)
-);
-
-CREATE TABLE refs(
-    id INT AUTO_INCREMENT primary key NOT NULL,
-    ref_identifier VARCHAR(200) NOT NULL,
-    attribute VARCHAR(60) NOT NULL,
-    content VARCHAR(1000) NOT NULL
-);
-
-CREATE TABLE stats(
-    id INT AUTO_INCREMENT primary key NOT NULL,
-    attribute VARCHAR(100) NOT NULL,
-    content VARCHAR(100) NOT NULL
+    acp VARCHAR(20) primary key NOT NULL,
+    id VARCHAR(255) NOT NULL,
+    acs VARCHAR(500),
+    sy VARCHAR(1000),
+    sx VARCHAR(255),
+    ca VARCHAR(255),
+    INDEX id (id),
+    INDEX acs (acs),
+    INDEX sy (sy),
+    INDEX sx (sx),
+    INDEX ca (ca)
 );
 
 LOAD DATA LOCAL INFILE '../data/csv/cells.csv' INTO TABLE cells
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE '../data/csv/attributes.csv' INTO TABLE attributes
-FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-IGNORE 1 LINES;
+# ==============================================================================
 
-LOAD DATA LOCAL INFILE '../data/csv/refs.csv' INTO TABLE refs
-FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-IGNORE 1 LINES;
+# CREATE TABLE attributes(
+#     id INT AUTO_INCREMENT primary key NOT NULL,
+#     accession VARCHAR(20) NOT NULL,
+#     attribute VARCHAR(60) NOT NULL,
+#     content VARCHAR(1000) NOT NULL,
+#     FOREIGN KEY (accession) REFERENCES cells(accession)
+# );
+#
+# LOAD DATA LOCAL INFILE '../data/csv/attributes.csv' INTO TABLE attributes
+# FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+# IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE '../data/csv/stats.csv' INTO TABLE stats
-FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-IGNORE 1 LINES;
+# ==============================================================================
+
+# CREATE TABLE refs(
+#     id INT AUTO_INCREMENT primary key NOT NULL,
+#     ref_identifier VARCHAR(200) NOT NULL,
+#     attribute VARCHAR(60) NOT NULL,
+#     content VARCHAR(1000) NOT NULL
+# );
+#
+# LOAD DATA LOCAL INFILE '../data/csv/refs.csv' INTO TABLE refs
+# FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+# IGNORE 1 LINES;
+
+# ==============================================================================
+
+# CREATE TABLE stats(
+#     id INT AUTO_INCREMENT primary key NOT NULL,
+#     attribute VARCHAR(100) NOT NULL,
+#     content VARCHAR(100) NOT NULL
+# );
+#
+# LOAD DATA LOCAL INFILE '../data/csv/stats.csv' INTO TABLE stats
+# FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+# IGNORE 1 LINES;
+
+# ==============================================================================
+
 EOF
 
 # Remove dump file, if it exists.
