@@ -24,5 +24,6 @@ type Route struct {
 type Routes []Route
 
 var routes = Routes{
-	Route{GET, "/cell-lines", ListCells},
+	Route{GET, "/release", ReleaseInfo},
+	// Route{GET, "/cell-lines", ListCells},
 }

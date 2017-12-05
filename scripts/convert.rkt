@@ -1,5 +1,5 @@
-;; Module converts Cellosaurus' .txt files to csv format.
-;; The text file(s) can be found at either of:
+;; Module converts Cellosaurus' text file data to csv format.
+;; The text file(s) can be found at one of:
 ;; * ftp://ftp.expasy.org/databases/cellosaurus
 ;; * https://github.com/calipho-sib/cellosaurus
 ;; The text files are cellosaurus.txt and cellosaurus_refs.txt
@@ -7,27 +7,53 @@
 #lang racket
 
 ;; Headers defining the list of column names for the csv files.
-(define header-cells "\"accession\",\"identifier\"")
+(define header-cells "\"acp\",\"id\",\"acs\",\"sy\",\"sx\",\"ca\"")
 (define header-attrs "\"\",\"accession\",\"attribute\",\"content\"")
 (define header-refs "\"\",\"ref_identifier\",\"attribute\",\"content\"")
 
 ;; write-cells-to-csv iterates over each line of cellosaurus.txt,
-;; parsing identifier and accession attributes, and writing
-;; content to csv (via printf).
-;; For example, lines such as:
-;;                            "ID   #15310-LN"
-;;                            "AC   CVCL_E548"
-;;              gets stored in csv as: "CVCL_E548","#15310-LN"
+;; parsing the following attributes for each cell line entry:
+;;  ID : Identifier (cell line name)
+;;  AC : Accession (CVCL_xxxx)
+;;  AS : Secondary accession number(s)
+;;  SY : Synonyms
+;;  SX : Sex (gender) of cell
+;;  CA : Category
 (define (write-cells-to-csv in)
   (define line (read-line in))
   (unless (eof-object? line)
-    (define id (cadr (string-split line "   ")))
-    (define ac (cadr (string-split (read-line in) "   ")))
-    (printf "\"~a\",\"~a\"\n" ac id)
-    (let loop ()
-      (if (equal? (read-line in) "//")
-          (write-cells-to-csv in)
-          (loop)))))
+    (let loop ([line line]
+               [id ""]
+               [ac ""]
+               [as ""]
+               [sy ""]
+               [sx ""]
+               [ca ""])
+      (define lst (string-split line "   "))
+      (cond
+        [(equal? (car lst) "//")
+         (printf "\"~a\",\"~a\",\"~a\",\"~a\",\"~a\",\"~a\"\n" ac id as sy sx ca)
+         (write-cells-to-csv in)]
+        [(equal? (car lst) "ID")
+         (set! id (cadr lst))
+         (loop (read-line in) id ac as sy sx ca)]
+        [(equal? (car lst) "AC")
+         (set! ac (cadr lst))
+         (loop (read-line in) id ac as sy sx ca)]
+        [(equal? (car lst) "AS")
+         (set! as (cadr lst))
+         (loop (read-line in) id ac as sy sx ca)]
+        [(equal? (car lst) "SY")
+         (set! sy (cadr lst))
+         (loop (read-line in) id ac as sy sx ca)]
+        [(equal? (car lst) "SX")
+         (set! sx (cadr lst))
+         (loop (read-line in) id ac as sy sx ca)]
+        [(equal? (car lst) "CA")
+         (set! ca (cadr lst))
+         (loop (read-line in) id ac as sy sx ca)]
+        [else
+         (loop (read-line in) id ac as sy sx ca)]))))
 
 ;; write-attrs-to-csv iterates over each line of cellosaurus.txt,
 ;; parsing line and writing content to csv (via printf).
@@ -86,6 +112,6 @@
 ;; --- "attributes.csv" ouput will contain each attribute type and attribute content
 ;;      for a cell line (referenced using accession).
 ;; --- "refs.csv" output will contain reference data for each reference identifier
-(convert "../data/txt/cellosaurus.txt" "../data/csv/cells.csv" "cells")
-(convert "../data/txt/cellosaurus.txt" "../data/csv/attributes.csv" "attributes")
-(convert "../data/txt/cellosaurus_refs.txt" "../data/csv/refs.csv" "refs")
+;; (convert "../data/txt/cellosaurus.txt" "../data/csv/cells.csv" "cells")
+;; (convert "../data/txt/cellosaurus.txt" "../data/csv/attributes.csv" "attributes")
+;; (convert "../data/txt/cellosaurus_refs.txt" "../data/csv/refs.csv" "refs")

@@ -6,28 +6,39 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ListCells handles GET requests for /cell-lines.
-func ListCells(c *gin.Context) {
-	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
-	perPage, _ := strconv.Atoi(c.DefaultQuery("per_page", "30"))
-	all, _ := strconv.ParseBool(c.DefaultQuery("all", "false"))
+// ReleaseInfo returns release information for current version of database.
+func ReleaseInfo(c *gin.Context) {
+	var rel Release
+	if err := rel.Create(); err != nil {
+		InternalServerError(c)
+		return
+	}
 	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
-
-	total, err := Count()
-	if err != nil {
-		InternalServerError(c)
-		return
-	}
-
-	if all {
-		perPage = total
-	}
-
-	var cells Cells
-	if err := cells.List(page, perPage); err != nil {
-		InternalServerError(c)
-		return
-	}
-
-	RenderWithMeta(c, page, perPage, total, indent, cells)
+	Render(c, indent, rel)
 }
+
+// ListCells handles GET requests for /cell-lines.
+// func ListCells(c *gin.Context) {
+// 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+// 	perPage, _ := strconv.Atoi(c.DefaultQuery("per_page", "30"))
+// 	all, _ := strconv.ParseBool(c.DefaultQuery("all", "false"))
+// 	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+//
+// 	total, err := Count()
+// 	if err != nil {
+// 		InternalServerError(c)
+// 		return
+// 	}
+//
+// 	if all {
+// 		perPage = total
+// 	}
+//
+// 	var cells Cells
+// 	if err := cells.List(page, perPage); err != nil {
+// 		InternalServerError(c)
+// 		return
+// 	}
+//
+// 	RenderWithMeta(c, page, perPage, total, indent, cells)
+// }

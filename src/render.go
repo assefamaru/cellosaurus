@@ -24,8 +24,7 @@ func RenderWithMeta(c *gin.Context, page int, perPage int, total int, indent boo
 		obj = gin.H{"data": data}
 	} else {
 		lastPage := int(math.Ceil(float64(total) / float64(perPage)))
-		meta := gin.H{"first-page": 1, "last-page": lastPage,
-			"current-page": page, "per-page": perPage, "total-cell-lines": total}
+		meta := gin.H{"page": page, "per-page": perPage, "last-page": lastPage, "total": total}
 		obj = gin.H{"meta": meta, "data": data}
 	}
 
