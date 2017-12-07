@@ -23,8 +23,8 @@ The following endpoints are currently supported.
 * **[/release-info](#Endpoints)**
 * **[/terminologies](#Endpoints)**
 * **[/references](#Endpoints)**
-* **[/cell_lines](#Endpoints)**
-* **[/cell_lines/{id}](#Endpoints)**
+* **[/cell-lines](#Endpoints)**
+* **[/cell-lines/{id}](#Endpoints)**
 
 ## Contributing
 
