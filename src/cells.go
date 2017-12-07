@@ -17,12 +17,12 @@ type Cell struct {
 
 // Cells is a list of cell lines.
 type Cells struct {
-	Meta Meta   `json:"meta"`
-	Data []Cell `json:"data"`
+	Meta cellMeta `json:"meta"`
+	Data []Cell   `json:"data"`
 }
 
-// Meta contains pagination information for returned data.
-type Meta struct {
+// cellMeta contains pagination information for returned data.
+type cellMeta struct {
 	Page     int `json:"page"`
 	PerPage  int `json:"per-page"`
 	LastPage int `json:"last-page"`
@@ -63,8 +63,12 @@ func (cells *Cells) List() error {
 			logSentry(err)
 			return err
 		}
-		cell.AC.Sec = strings.Split(acs, "; ")
-		cell.SY = strings.Split(sy, "; ")
+		if acs != "" {
+			cell.AC.Sec = strings.Split(acs, "; ")
+		}
+		if sy != "" {
+			cell.SY = strings.Split(sy, "; ")
+		}
 		cells.Data = append(cells.Data, cell)
 	}
 
@@ -84,7 +88,7 @@ func totalCells() (int, error) {
 		return total, err
 	}
 
-	err = db.QueryRow("SELECT content FROM releaseInfo where attribute = 'total';").Scan(&count)
+	err = db.QueryRow("SELECT content FROM releaseInfo where attribute = 'totalCells';").Scan(&count)
 	if err != nil {
 		logSentry(err)
 		return total, err

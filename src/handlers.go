@@ -72,3 +72,37 @@ func ListCells(c *gin.Context) {
 
 	Render(c, indent, cells)
 }
+
+// ListReferences handles GET requests for /references.
+func ListReferences(c *gin.Context) {
+	var refs References
+
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	perPage, _ := strconv.Atoi(c.DefaultQuery("per_page", "10"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+
+	total, err := totalRefs()
+	if err != nil {
+		InternalServerError(c)
+		return
+	}
+
+	lastPage := int(math.Ceil(float64(total) / float64(perPage)))
+
+	// Set max number of references to return per request
+	if perPage > 100 {
+		perPage = 100
+	}
+
+	refs.Meta.Page = page
+	refs.Meta.PerPage = perPage
+	refs.Meta.LastPage = lastPage
+	refs.Meta.Total = total
+
+	if err := refs.List(); err != nil {
+		InternalServerError(c)
+		return
+	}
+
+	Render(c, indent, refs)
+}
