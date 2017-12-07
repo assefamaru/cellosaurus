@@ -62,17 +62,17 @@ IGNORE 1 LINES;
 
 # ==============================================================================
 
-# CREATE TABLE attributes(
-#     id INT AUTO_INCREMENT primary key NOT NULL,
-#     accession VARCHAR(20) NOT NULL,
-#     attribute VARCHAR(60) NOT NULL,
-#     content VARCHAR(1000) NOT NULL,
-#     FOREIGN KEY (accession) REFERENCES cells(accession)
-# );
-#
-# LOAD DATA LOCAL INFILE '../data/csv/attributes.csv' INTO TABLE attributes
-# FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-# IGNORE 1 LINES;
+CREATE TABLE attributes(
+    id INT AUTO_INCREMENT primary key NOT NULL,
+    accession VARCHAR(20) NOT NULL,
+    attribute VARCHAR(60) NOT NULL,
+    content VARCHAR(1000) NOT NULL,
+    FOREIGN KEY (accession) REFERENCES cells(acp)
+);
+
+LOAD DATA LOCAL INFILE '../data/csv/attributes.csv' INTO TABLE attributes
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+IGNORE 1 LINES;
 
 # ==============================================================================
 

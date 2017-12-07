@@ -57,21 +57,22 @@
 
 ;; write-attrs-to-csv iterates over each line of cellosaurus.txt,
 ;; parsing line and writing content to csv (via printf).
-;; For example, a line such as: "SX   Female"
-;;              gets stored in csv as: n,"CVCL_xxxx","SX","Female"
-;;              whereby n is some row number (integer) > 0
 (define (write-attrs-to-csv in [row 1])
   (define line (read-line in))
   (unless (eof-object? line)
     (define ac (cadr (string-split (read-line in) "   ")))
     (let loop ([row row])
-      (define line (read-line in))
+      (define line (string-split (read-line in) "   "))
       (cond
-        [(equal? line "//")
+        [(equal? (car line) "//")
          (write-attrs-to-csv in row)]
+        [(or (equal? (car line) "AS")
+             (equal? (car line) "SY")
+             (equal? (car line) "SX")
+             (equal? (car line) "CA"))
+         (loop row)]
         [else
-         (define lst (string-split line "   "))
-         (printf "~a,\"~a\",\"~a\",\"~a\"\n" row ac (car lst) (cadr lst))
+         (printf "~a,\"~a\",\"~a\",\"~a\"\n" row ac (car line) (cadr line))
          (loop (add1 row))]))))
 
 ;; write-refs-to-csv iterates over each line of cellosaurus_refs.txt,
@@ -124,10 +125,9 @@
   (close-input-port in))
 
 ;; --- "cells.csv" output will contain unique cell lines,
-;;      each with their identifier and accession attributes only.
 ;; --- "attributes.csv" ouput will contain each attribute type and attribute content
 ;;      for a cell line (referenced using accession).
 ;; --- "refs.csv" output will contain reference data for each reference identifier
 ;; (convert "../data/txt/cellosaurus.txt" "../data/csv/cells.csv" "cells")
 ;; (convert "../data/txt/cellosaurus.txt" "../data/csv/attributes.csv" "attributes")
-(convert "../data/txt/cellosaurus_refs.txt" "../data/csv/refs.csv" "refs")
+;; (convert "../data/txt/cellosaurus_refs.txt" "../data/csv/refs.csv" "refs")
