@@ -1,6 +1,7 @@
 package cellosaurus
 
 import (
+	"database/sql"
 	"math"
 	"net/http"
 	"strconv"
@@ -71,6 +72,25 @@ func ListCells(c *gin.Context) {
 	}
 
 	Render(c, indent, cells)
+}
+
+// FindCell handles GET requests for /cell-lines/:id.
+func FindCell(c *gin.Context) {
+	var cell Cell
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+
+	cell.ID = c.Param("id")
+	err := cell.Find()
+	if err != nil {
+		if err == sql.ErrNoRows {
+			NotFound(c)
+		} else {
+			InternalServerError(c)
+		}
+		return
+	}
+
+	Render(c, indent, cell)
 }
 
 // ListReferences handles GET requests for /references.

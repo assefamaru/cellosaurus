@@ -1,6 +1,7 @@
 package cellosaurus
 
 import (
+	"database/sql"
 	"fmt"
 	"strconv"
 	"strings"
@@ -13,6 +14,15 @@ type Cell struct {
 	SY []string  `json:"synonyms,omitempty"`
 	CA string    `json:"category,omitempty"`
 	SX string    `json:"sex,omitempty"`
+	DR []DR      `json:"cross-references,omitempty"`
+	RX []string  `json:"reference-identifiers,omitempty"`
+	WW []string  `json:"web-pages,omitempty"`
+	CC []CC      `json:"comments,omitempty"`
+	ST ST        `json:"str-profile-data,omitempty"`
+	DI []DI      `json:"diseases,omitempty"`
+	OX []OX      `json:"species-of-origin,omitempty"`
+	HI []HI      `json:"hierarchy,omitempty"`
+	OI []OI      `json:"same-origin-as,omitempty"`
 }
 
 // Cells is a list of cell lines.
@@ -33,6 +43,58 @@ type cellMeta struct {
 type Accession struct {
 	Pri string   `json:"primary"`
 	Sec []string `json:"secondary,omitempty"`
+}
+
+// OX is a species of origin data.
+type OX struct {
+	Terminology string `json:"terminology,omitempty"`
+	Accession   string `json:"accession,omitempty"`
+	Species     string `json:"species,omitempty"`
+}
+
+// DR is a cross references data.
+type DR struct {
+	Database  string `json:"database,omitempty"`
+	Accession string `json:"accession,omitempty"`
+}
+
+// CC is a comments data.
+type CC struct {
+	Category string `json:"category,omitempty"`
+	Comment  string `json:"comment,omitemtpy"`
+}
+
+// Marker is an str profile data marker.
+type Marker struct {
+	ID      string `json:"id,omitempty"`
+	Alleles string `json:"alleles,omitempty"`
+}
+
+// ST is an str profile data.
+type ST struct {
+	Sources []string `json:"sources,omitempty"`
+	Markers []Marker `json:"markers,omitempty"`
+}
+
+// DI is a disease data.
+type DI struct {
+	Terminology string `json:"terminology,omitempty"`
+	Accession   string `json:"accession,omitempty"`
+	Disease     string `json:"disease,omitempty"`
+}
+
+// HI is a hierarchy data.
+type HI struct {
+	Terminology string `json:"terminology,omitempty"`
+	Accession   string `json:"accession,omitempty"`
+	DF          string `json:"derived-from,omitempty"`
+}
+
+// OI is a same-origin-as data.
+type OI struct {
+	Terminology string `json:"terminology,omitempty"`
+	Accession   string `json:"accession,omitempty"`
+	Identifier  string `json:"identifier,omitempty"`
 }
 
 // List returns a list of paginated cell lines.
@@ -75,6 +137,108 @@ func (cells *Cells) List() error {
 	return nil
 }
 
+// Find finds and updates a cell line with all its attributes.
+func (cell *Cell) Find() error {
+	var (
+		query string
+		acs   string
+		sy    string
+	)
+
+	db, err := Database()
+	defer db.Close()
+	if err != nil {
+		logSentry(err)
+		return err
+	}
+
+	id := cell.ID
+
+	query = fmt.Sprintf("SELECT acp, id, acs, sy, sx, ca FROM cells WHERE acp = '%s';", id)
+	row := db.QueryRow(query)
+	err = row.Scan(&cell.AC.Pri, &cell.ID, &acs, &sy, &cell.SX, &cell.CA)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			query = fmt.Sprintf("SELECT acp, id, acs, sy, sx, ca FROM cells WHERE id = '%s';", id)
+			row := db.QueryRow(query)
+			err = row.Scan(&cell.AC.Pri, &cell.ID, &acs, &sy, &cell.SX, &cell.CA)
+			if err != nil {
+				if err == sql.ErrNoRows {
+					q := "SELECT acp, id, acs, sy, sx, ca FROM cells WHERE MATCH (sy) AGAINST"
+					query = fmt.Sprintf("%s ('+%s' in BOOLEAN MODE) LIMIT 1;", q, id)
+					row := db.QueryRow(query)
+					err = row.Scan(&cell.AC.Pri, &cell.ID, &acs, &sy, &cell.SX, &cell.CA)
+					if err != nil {
+						if err != sql.ErrNoRows {
+							logSentry(err)
+						}
+						return err
+					}
+				} else {
+					logSentry(err)
+					return err
+				}
+			}
+		} else {
+			logSentry(err)
+			return err
+		}
+	}
+
+	query = fmt.Sprintf("SELECT attribute, content FROM attributes WHERE accession = '%s';", cell.AC.Pri)
+	rows, err := db.Query(query)
+	defer rows.Close()
+	if err != nil {
+		logSentry(err)
+		return err
+	}
+	for rows.Next() {
+		var (
+			attribute string
+			content   string
+		)
+		if err = rows.Scan(&attribute, &content); err != nil {
+			logSentry(err)
+			return err
+		}
+
+		switch attribute {
+		case "DR":
+			dr := strings.Split(content, "; ")
+			cell.DR = append(cell.DR, DR{dr[0], dr[1]})
+		case "RX":
+			cell.RX = append(cell.RX, strings.TrimRight(content, ";"))
+		case "WW":
+			cell.WW = append(cell.WW, content)
+		case "CC":
+			cc := strings.Split(content, ": ")
+			cell.CC = append(cell.CC, CC{cc[0], cc[1]})
+		case "ST":
+			st := strings.Split(content, ": ")
+			if st[0] == "Source(s)" {
+				cell.ST.Sources = strings.Split(st[1], "; ")
+			} else {
+				cell.ST.Markers = append(cell.ST.Markers, Marker{st[0], st[1]})
+			}
+		case "DI":
+			di := strings.Split(content, "; ")
+			cell.DI = append(cell.DI, DI{di[0], di[1], di[2]})
+		case "OX":
+			f := strings.Split(content, " ! ")
+			s := strings.Split(strings.TrimRight(f[0], ";"), "=")
+			cell.OX = append(cell.OX, OX{"NCBI-Taxonomy", s[1], f[1]})
+		case "HI":
+			hi := strings.Split(content, " ! ")
+			cell.HI = append(cell.HI, HI{"Cellosaurus", hi[0], hi[1]})
+		case "OI":
+			oi := strings.Split(content, " ! ")
+			cell.OI = append(cell.OI, OI{"Cellosaurus", oi[0], oi[1]})
+		}
+	}
+
+	return nil
+}
+
 // totalCells returns the total number of cell line records in database.
 func totalCells() (int, error) {
 	var (
@@ -85,6 +249,7 @@ func totalCells() (int, error) {
 	db, err := Database()
 	defer db.Close()
 	if err != nil {
+		logSentry(err)
 		return total, err
 	}
 
