@@ -28,5 +28,5 @@ var routes = Routes{
 	Route{GET, "/terminologies", ListTerminologies},
 	Route{GET, "/references", ListReferences},
 	Route{GET, "/cell-lines", ListCells},
-	// Route{GET, "/cell-lines/:id", GetCell},
+	Route{GET, "/cell-lines/:id", FindCell},
 }

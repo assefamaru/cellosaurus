@@ -51,7 +51,7 @@ CREATE TABLE cells(
     ca VARCHAR(255),
     INDEX id (id),
     INDEX acs (acs),
-    INDEX sy (sy),
+    FULLTEXT (sy),
     INDEX sx (sx),
     INDEX ca (ca)
 );

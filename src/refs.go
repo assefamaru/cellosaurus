@@ -84,6 +84,7 @@ func totalRefs() (int, error) {
 	db, err := Database()
 	defer db.Close()
 	if err != nil {
+		logSentry(err)
 		return total, err
 	}
 
