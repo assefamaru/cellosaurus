@@ -20,11 +20,11 @@ https://api.cellosaur.us/v1/
 
 The following endpoints are currently supported.
 
-* **[/release-info](#Endpoints)**
-* **[/terminologies](#Endpoints)**
-* **[/references](#Endpoints)**
-* **[/cell-lines](#Endpoints)**
-* **[/cell-lines/{id}](#Endpoints)**
+* **[/release-info](https://api.cellosaur.us/v1/release-info)**
+* **[/terminologies](https://api.cellosaur.us/v1/terminologies)**
+* **[/references](https://api.cellosaur.us/v1/references)**
+* **[/cell-lines](https://api.cellosaur.us/v1/cell-lines)**
+* **[/cell-lines/{id}](https://api.cellosaur.us/v1/cell-lines/mcf7)**
 
 ## Contributing
 
