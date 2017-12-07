@@ -21,6 +21,9 @@ func Init(c Context) {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
+	router.LoadHTMLGlob("./static/img/*")
+	router.StaticFile("/favicon.ico", "./static/img/favicon.ico")
+
 	// Handle api routes
 	v1 := router.Group("/v1")
 	for _, route := range routes {
