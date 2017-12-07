@@ -9,7 +9,7 @@
 ;; Headers defining the list of column names for the csv files.
 (define header-cells "\"acp\",\"id\",\"acs\",\"sy\",\"sx\",\"ca\"")
 (define header-attrs "\"\",\"accession\",\"attribute\",\"content\"")
-(define header-refs "\"\",\"ref_identifier\",\"attribute\",\"content\"")
+(define header-refs "\"\",\"rx\",\"ra\",\"rg\",\"rt\",\"rl\"")
 
 ;; write-cells-to-csv iterates over each line of cellosaurus.txt,
 ;; parsing the following attributes for each cell line entry:
@@ -74,21 +74,37 @@
          (printf "~a,\"~a\",\"~a\",\"~a\"\n" row ac (car lst) (cadr lst))
          (loop (add1 row))]))))
 
-;; write-attrs-to-csv iterates over each line of cellosaurus_refs.txt,
+;; write-refs-to-csv iterates over each line of cellosaurus_refs.txt,
 ;; parsing line and writing content to csv (via printf).
 (define (write-refs-to-csv in [row 1])
   (define line (read-line in))
   (unless (eof-object? line)
-    (define rx (cadr (string-split line "   ")))
-    (let loop ([row row])
-      (define line (read-line in))
+    (let loop ([line line]
+               [rx ""]
+               [ra ""]
+               [rg ""]
+               [rt ""]
+               [rl ""])
+      (define lst (string-split line "   "))
       (cond
-        [(equal? line "//")
-         (write-refs-to-csv in row)]
-        [else
-         (define lst (string-split line "   "))
-         (printf "~a,\"~a\",\"~a\",\"~a\"\n" row rx (car lst) (cadr lst))
-         (loop (add1 row))]))))
+        [(equal? (car lst) "//")
+         (printf "\"~a\",\"~a\",\"~a\",\"~a\",\"~a\",\"~a\"\n" row rx ra rg rt rl)
+         (write-refs-to-csv in (add1 row))]
+        [(equal? (car lst) "RX")
+         (set! rx (cadr lst))
+         (loop (read-line in) rx ra rg rt rl)]
+        [(equal? (car lst) "RA")
+         (set! ra (string-append ra " " (cadr lst)))
+         (loop (read-line in) rx ra rg rt rl)]
+        [(equal? (car lst) "RG")
+         (set! rg (string-append rg " " (cadr lst)))
+         (loop (read-line in) rx ra rg rt rl)]
+        [(equal? (car lst) "RT")
+         (set! rt (string-append rt " " (cadr lst)))
+         (loop (read-line in) rx ra rg rt rl)]
+        [(equal? (car lst) "RL")
+         (set! rl (cadr lst))
+         (loop (read-line in) rx ra rg rt rl)]))))
 
 ;; Convert Cellosaurus' data from txt to csv format.
 (define (convert txt csv table)
@@ -114,4 +130,4 @@
 ;; --- "refs.csv" output will contain reference data for each reference identifier
 ;; (convert "../data/txt/cellosaurus.txt" "../data/csv/cells.csv" "cells")
 ;; (convert "../data/txt/cellosaurus.txt" "../data/csv/attributes.csv" "attributes")
-;; (convert "../data/txt/cellosaurus_refs.txt" "../data/csv/refs.csv" "refs")
+(convert "../data/txt/cellosaurus_refs.txt" "../data/csv/refs.csv" "refs")

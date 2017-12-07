@@ -1,5 +1,7 @@
 package cellosaurus
 
+import "strconv"
+
 // Release models release specific information for the Cellosaurus.
 type Release struct {
 	Name        string  `json:"database"`
@@ -10,11 +12,12 @@ type Release struct {
 type relStat struct {
 	Version      string `json:"version"`
 	Updated      string `json:"updated"`
-	Total        string `json:"total"`
-	Human        string `json:"human"`
-	Mouse        string `json:"mouse"`
-	Rat          string `json:"rat"`
-	Publications string `json:"publications"`
+	Total        int    `json:"total"`
+	Human        int    `json:"human"`
+	Mouse        int    `json:"mouse"`
+	Rat          int    `json:"rat"`
+	Publications int    `json:"publications"`
+	References   int    `json:"references"`
 }
 
 // Create returns release information for the Cellosaurus.
@@ -45,16 +48,18 @@ func (rel *Release) Create() error {
 			rel.Name = content
 		case "description":
 			rel.Description = content
-		case "total":
-			rel.Stat.Total = content
+		case "totalCells":
+			rel.Stat.Total, _ = strconv.Atoi(content)
 		case "human":
-			rel.Stat.Human = content
+			rel.Stat.Human, _ = strconv.Atoi(content)
 		case "mouse":
-			rel.Stat.Mouse = content
+			rel.Stat.Mouse, _ = strconv.Atoi(content)
 		case "rat":
-			rel.Stat.Rat = content
+			rel.Stat.Rat, _ = strconv.Atoi(content)
 		case "publications":
-			rel.Stat.Publications = content
+			rel.Stat.Publications, _ = strconv.Atoi(content)
+		case "totalReferences":
+			rel.Stat.References, _ = strconv.Atoi(content)
 		case "version":
 			rel.Stat.Version = content
 		case "updated":

@@ -76,16 +76,18 @@ IGNORE 1 LINES;
 
 # ==============================================================================
 
-# CREATE TABLE refs(
-#     id INT AUTO_INCREMENT primary key NOT NULL,
-#     ref_identifier VARCHAR(200) NOT NULL,
-#     attribute VARCHAR(60) NOT NULL,
-#     content VARCHAR(1000) NOT NULL
-# );
-#
-# LOAD DATA LOCAL INFILE '../data/csv/refs.csv' INTO TABLE refs
-# FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-# IGNORE 1 LINES;
+CREATE TABLE refs(
+    id INT AUTO_INCREMENT primary key NOT NULL,
+    rx VARCHAR(200) NOT NULL,
+    ra VARCHAR(500),
+    rg VARCHAR(200),
+    rt VARCHAR(500) NOT NULL,
+    rl VARCHAR(200) NOT NULL
+);
+
+LOAD DATA LOCAL INFILE '../data/csv/refs.csv' INTO TABLE refs
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+IGNORE 1 LINES;
 
 # ==============================================================================
 
