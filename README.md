@@ -40,7 +40,7 @@ To run the API locally,
 To contribute, you can:
 
 * Fork this repository, make edits, and open a pull request.
-* Offer suggestions, request new fetures, or report any errors by creating a [new](https://github.com/assefamaru/cellosaurus-api/issues/new) issue and assigning it an appropriate label.
+* Offer suggestions, request new features, or report any errors by creating a [new](https://github.com/assefamaru/cellosaurus-api/issues/new) issue and assigning it an appropriate label.
 
 ## License
 
