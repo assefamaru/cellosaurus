@@ -26,6 +26,15 @@ The following endpoints are currently supported.
 * **[/cell-lines](https://api.cellosaur.us/v1/cell-lines)**
 * **[/cell-lines/{id}](https://api.cellosaur.us/v1/cell-lines/mcf7)**
 
+## How to setup API locally
+
+To run the API locally,
+
+- Download and extract the [latest release](https://github.com/assefamaru/cellosaurus-api/releases/latest).
+- Navigate to the [/scripts](scripts) directory and execute the script `db.sh`. This will setup the full database in your mysql instance.
+- Create the following environment variables locally: `cellosaurus_user`, `cellosaurus_pass`, `cellosaurus_db`, `cellosaurus_host`. They represent your local mysql user, password, database name and host respectively.
+- Now that the API is set up, you can either run one of the available [executables](build), or run `go run main.go`.
+
 ## Contributing
 
 To contribute, you can:
