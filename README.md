@@ -74,7 +74,7 @@ To set up the API locally,
 
 With the above steps, the API should now be fully setup on your local machine. You can now run the API using one of two options:
 
-1. Run one of the pre-built [executables](build). Depending on your operating system, you should pick the right binary. For example, if you are on a 64 bit Ubuntu OS, you can use `linux-amd64`, or use one of the `.exe` builds for windows etc.
+1. Run one of the pre-built [executables](build). Depending on your operating system, you should pick the right binary. For example, if you are on a 64 bit Ubuntu OS, you can use `linux-amd64`, whereas for windows you can use one of the `.exe` builds etc.
 2. You can also simply run `go run main.go` in the main directory.
 
 ## Contributing
