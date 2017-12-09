@@ -1,5 +1,3 @@
-# The Cellosaurus API
-
 # cellosaurus-api
 
 [![Build Status](https://travis-ci.org/assefamaru/cellosaurus-api.svg?branch=master)](https://travis-ci.org/assefamaru/cellosaurus-api)
