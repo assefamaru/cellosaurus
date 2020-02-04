@@ -43,7 +43,7 @@ CREATE TABLE cells(
     dt VARCHAR(255),
     INDEX id (id),
     INDEX acs (acs),
-    FULLTEXT (sy),
+    INDEX sy (sy),
     INDEX sx (sx),
     INDEX ca (ca)
 );
