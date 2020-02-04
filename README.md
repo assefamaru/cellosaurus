@@ -22,11 +22,11 @@ Responses are in `json` format.
 
 The following endpoints are currently supported:
 
-* **[/cell-lines](https://api.cellosaur.us/v1/cell-lines)**
-* **[/cell-lines/{id}](https://api.cellosaur.us/v1/cell-lines/mcf7)**
-* **[/references](https://api.cellosaur.us/v1/references)**
-* **[/terminologies](https://api.cellosaur.us/v1/terminologies)**
-* **[/release-info](https://api.cellosaur.us/v1/release-info)**
+* **[/cell-lines](https://api.cellosaur.us/v33/cell-lines)**
+* **[/cell-lines/{id}](https://api.cellosaur.us/v33/cell-lines/mcf7)**
+* **[/references](https://api.cellosaur.us/v33/references)**
+* **[/terminologies](https://api.cellosaur.us/v33/terminologies)**
+* **[/release-info](https://api.cellosaur.us/v33/release-info)**
 
 ### Requests
 
@@ -34,11 +34,11 @@ All endpoints accept `GET` HTTP method, and each endpoint has a set of parameter
 
 | Endpoints | Parameters | Examples |
 | :--- | :--- | :--- |
-| **/cell-lines** | `page`, `per_page`, `indent` | https://api.cellosaur.us/v1/cell-lines?page=1&per_page=20 |
-| **/cell-lines/{id}** | `indent` | https://api.cellosaur.us/v1/cell-lines/mcf7?indent=true |
-| **/references** | `page`, `per_page`, `indent` | https://api.cellosaur.us/v1/references?page=1&per_page=10&indent=true |
-| **/terminologies** | `indent` | https://api.cellosaur.us/v1/terminologies?indent=true |
-| **/release-info** | `indent` | https://api.cellosaur.us/v1/release-info |
+| **/cell-lines** | `page`, `per_page`, `indent` | https://api.cellosaur.us/v33/cell-lines?page=1&per_page=20 |
+| **/cell-lines/{id}** | `indent` | https://api.cellosaur.us/v33/cell-lines/mcf7?indent=true |
+| **/references** | `page`, `per_page`, `indent` | https://api.cellosaur.us/v33/references?page=1&per_page=10&indent=true |
+| **/terminologies** | `indent` | https://api.cellosaur.us/v33/terminologies?indent=true |
+| **/release-info** | `indent` | https://api.cellosaur.us/v33/release-info |
 
 Parameters need not be present in request URLs. When parameters are not included in request, they are set to their default values. The following are their default values:
 
