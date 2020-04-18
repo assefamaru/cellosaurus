@@ -24,9 +24,14 @@ type Route struct {
 type Routes []Route
 
 var routes = Routes{
+	Route{GET, "/", GetReleaseInfo},
+	Route{GET, "/cells", ListCells},
+	Route{GET, "/cell_lines", ListCells},
+	Route{GET, "/cell-lines", ListCells},
+	Route{GET, "/cells/:id", FindCell},
+	Route{GET, "/cell_lines/:id", FindCell},
+	Route{GET, "/cell-lines/:id", FindCell},
 	Route{GET, "/release-info", GetReleaseInfo},
 	Route{GET, "/terminologies", ListTerminologies},
 	Route{GET, "/references", ListReferences},
-	Route{GET, "/cell-lines", ListCells},
-	Route{GET, "/cell-lines/:id", FindCell},
 }

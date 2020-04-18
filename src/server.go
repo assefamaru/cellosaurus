@@ -25,9 +25,9 @@ func Init(c Context) {
 	router.StaticFile("/favicon.ico", "./static/img/favicon.ico")
 
 	// Handle api routes
-	v33 := router.Group("/v33")
+	v := router.Group("/v34")
 	for _, route := range routes {
-		v33.Handle(route.Method, route.Endpoint, route.Handler)
+		v.Handle(route.Method, route.Endpoint, route.Handler)
 	}
 
 	// If no routers match the request url,

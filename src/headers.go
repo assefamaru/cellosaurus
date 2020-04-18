@@ -12,12 +12,17 @@ type Release struct {
 type relStat struct {
 	Version      string `json:"version"`
 	Updated      string `json:"updated"`
-	Total        int    `json:"total"`
+	Total        int    `json:"cell-lines"`
 	Human        int    `json:"human"`
 	Mouse        int    `json:"mouse"`
 	Rat          int    `json:"rat"`
-	Publications int    `json:"publications"`
+	Species      int    `json:"species"`
+	Synonyms     int    `json:"synonyms"`
+	CrossRefs    int    `json:"cross-references"`
 	References   int    `json:"references"`
+	DistinctRefs int    `json:"distinct-references"`
+	WebLinks     int    `json:"web-links"`
+	CellsWithSTR int    `json:"cells-with-str-profiles"`
 }
 
 // Create returns release information for the Cellosaurus.
@@ -56,10 +61,20 @@ func (rel *Release) Create() error {
 			rel.Stat.Mouse, _ = strconv.Atoi(content)
 		case "rat":
 			rel.Stat.Rat, _ = strconv.Atoi(content)
-		case "publications":
-			rel.Stat.Publications, _ = strconv.Atoi(content)
-		case "totalReferences":
+		case "species":
+			rel.Stat.Species, _ = strconv.Atoi(content)
+		case "synonyms":
+			rel.Stat.Synonyms, _ = strconv.Atoi(content)
+		case "crossReferences":
+			rel.Stat.CrossRefs, _ = strconv.Atoi(content)
+		case "references":
 			rel.Stat.References, _ = strconv.Atoi(content)
+		case "distinctRefs":
+			rel.Stat.DistinctRefs, _ = strconv.Atoi(content)
+		case "webLinks":
+			rel.Stat.WebLinks, _ = strconv.Atoi(content)
+		case "cellsWithSTR":
+			rel.Stat.CellsWithSTR, _ = strconv.Atoi(content)
 		case "version":
 			rel.Stat.Version = content
 		case "updated":
@@ -72,10 +87,11 @@ func (rel *Release) Create() error {
 
 // Terminology models terminology information contained in database.
 type Terminology struct {
-	Name        string `json:"name"`
-	Source      string `json:"source"`
-	Description string `json:"description"`
-	URL         string `json:"url"`
+	Abbreviation string `json:"Abbreviation"`
+	Name         string `json:"Name"`
+	Server       string `json:"Server"`
+	DbURL        string `json:"Db_URL"`
+	Cat          string `json:"Cat"`
 }
 
 // Terminologies is a list of Terminology.
@@ -89,7 +105,7 @@ func (terms *Terminologies) List() error {
 		return err
 	}
 
-	rows, err := db.Query("SELECT name, source, description, url FROM terminologies;")
+	rows, err := db.Query("SELECT abbreviation, name, server, db_url, cat FROM terminologies;")
 	defer rows.Close()
 	if err != nil {
 		logSentry(err)
@@ -97,7 +113,7 @@ func (terms *Terminologies) List() error {
 	}
 	for rows.Next() {
 		var term Terminology
-		err := rows.Scan(&term.Name, &term.Source, &term.Description, &term.URL)
+		err := rows.Scan(&term.Abbreviation, &term.Name, &term.Server, &term.DbURL, &term.Cat)
 		if err != nil {
 			logSentry(err)
 			return err

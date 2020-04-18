@@ -9,6 +9,7 @@
 ;; Headers defining the list of column names for the csv files.
 (define header-cells "\"acp\",\"id\",\"acs\",\"sy\",\"sx\",\"ca\"")
 (define header-attrs "\"\",\"accession\",\"attribute\",\"content\"")
+(define header-terms "\"\",\"abbreviation\",\"name\",\"server\",\"db_url\",\"cat\"")
 (define header-refs "\"\",\"rx\",\"ra\",\"rg\",\"rt\",\"rl\"")
 
 ;; write-cells-to-csv iterates over each line of cellosaurus.txt,
@@ -71,13 +72,54 @@
         [(equal? (car line) "//")
          (write-attrs-to-csv in row)]
         [(or (equal? (car line) "AS")
-             (equal? (car line) "SY")
              (equal? (car line) "SX")
              (equal? (car line) "CA"))
          (loop row)]
+        [(equal? (car line) "SY")
+         (let xs ([lst (string-split (cadr line) "; ")]
+                  [row row])
+           (cond
+             [(null? lst)
+              (loop row)]
+             [else
+              (printf "~a,\"~a\",\"~a\",\"~a\"\n" row ac "SY" (car lst))
+              (xs (cdr lst) (add1 row))]))]
         [else
          (printf "~a,\"~a\",\"~a\",\"~a\"\n" row ac (car line) (cadr line))
          (loop (add1 row))]))))
+
+;; write-terms-to-csv iterates over each line of cellosaurus_xrefs.txt,
+;; parsing line and writing content to csv (via printf).
+(define (write-terms-to-csv in [row 1])
+  (define line (read-line in))
+  (unless (eof-object? line)
+    (let loop ([line line]
+               [ab ""]
+               [na ""]
+               [se ""]
+               [db ""]
+               [ca ""])
+      (define lst (string-split line ": "))
+      (cond
+        [(equal? (car lst) "//")
+         (printf "\"~a\",\"~a\",\"~a\",\"~a\",\"~a\",\"~a\"\n" row ab na se db ca)
+         (write-terms-to-csv in (add1 row))]
+        [(equal? (car lst) "Abbrev")
+         (set! ab (cadr lst))
+         (loop (read-line in) ab na se db ca)]
+        [(equal? (car lst) "Name  ")
+         (set! na (cadr lst))
+         (loop (read-line in) ab na se db ca)]
+        [(equal? (car lst) "Server")
+         (set! se (cadr lst))
+         (loop (read-line in) ab na se db ca)]
+        [(equal? (car lst) "Db_URL")
+         (set! db (cadr lst))
+         (loop (read-line in) ab na se db ca)]
+        [(equal? (car lst) "Cat   ")
+         (set! ca (cadr lst))
+         (loop (read-line in) ab na se db ca)]
+        [else (loop (read-line in) ab na se db ca)]))))
 
 ;; write-refs-to-csv iterates over each line of cellosaurus_refs.txt,
 ;; parsing line and writing content to csv (via printf).
@@ -123,7 +165,10 @@
         [(equal? table "attributes")
          (printf "~a\n" header-attrs)
          (write-attrs-to-csv in)]
-        [(equal? table "refs")
+        [(equal? table "terminologies")
+         (printf "~a\n" header-terms)
+         (write-terms-to-csv in)]
+        [(equal? table "references")
          (printf "~a\n" header-refs)
          (write-refs-to-csv in)])))
   (close-input-port in))
@@ -132,6 +177,7 @@
 ;; --- "attributes.csv" ouput will contain each attribute type and attribute content
 ;;      for a cell line (referenced using accession).
 ;; --- "refs.csv" output will contain reference data for each reference identifier
-(convert "../data/txt/cellosaurus.txt" "../data/csv/cells.csv" "cells")
+(convert "../data/txt/cellosaurus.txt" "../data/csv/cell_lines.csv" "cells")
 (convert "../data/txt/cellosaurus.txt" "../data/csv/attributes.csv" "attributes")
-(convert "../data/txt/cellosaurus_refs.txt" "../data/csv/refs.csv" "refs")
+(convert "../data/txt/cellosaurus_refs.txt" "../data/csv/references.csv" "references")
+(convert "../data/txt/cellosaurus_xrefs.txt" "../data/csv/terminologies.csv" "terminologies")

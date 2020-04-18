@@ -88,7 +88,7 @@ func totalRefs() (int, error) {
 		return total, err
 	}
 
-	err = db.QueryRow("SELECT content FROM releaseInfo where attribute = 'totalReferences';").Scan(&count)
+	err = db.QueryRow("SELECT content FROM releaseInfo where attribute = 'references';").Scan(&count)
 	if err != nil {
 		logSentry(err)
 		return total, err

@@ -23,7 +23,7 @@ type Cell struct {
 	OX []OX      `json:"species-of-origin,omitempty"`
 	HI []HI      `json:"hierarchy,omitempty"`
 	OI []OI      `json:"same-origin-as,omitempty"`
-	DT []DT		 `json:"entry-date,omitempty"`	
+	DT []DT      `json:"entry-date,omitempty"`
 }
 
 // Cells is a list of cell lines.
@@ -172,9 +172,18 @@ func (cell *Cell) Find() error {
 			err = row.Scan(&cell.AC.Pri, &cell.ID, &acs, &sy, &cell.SX, &cell.CA)
 			if err != nil {
 				if err == sql.ErrNoRows {
-					q := "SELECT acp, id, acs, sy, sx, ca FROM cells WHERE MATCH (sy) AGAINST"
-					query = fmt.Sprintf("%s ('+%s' in BOOLEAN MODE) LIMIT 1;", q, id)
+					var acc string
+					query = fmt.Sprintf("SELECT accession FROM attributes WHERE (attribute='SY' AND content='%s') LIMIT 1;", id)
 					row := db.QueryRow(query)
+					err = row.Scan(&acc)
+					if err != nil {
+						if err != sql.ErrNoRows {
+							logSentry(err)
+						}
+						return err
+					}
+					query = fmt.Sprintf("SELECT acp, id, acs, sy, sx, ca FROM cells WHERE (acp='%s');", acc)
+					row = db.QueryRow(query)
 					err = row.Scan(&cell.AC.Pri, &cell.ID, &acs, &sy, &cell.SX, &cell.CA)
 					if err != nil {
 						if err != sql.ErrNoRows {
@@ -191,6 +200,13 @@ func (cell *Cell) Find() error {
 			logSentry(err)
 			return err
 		}
+	}
+
+	if acs != "" {
+		cell.AC.Sec = strings.Split(acs, "; ")
+	}
+	if sy != "" {
+		cell.SY = strings.Split(sy, "; ")
 	}
 
 	query = fmt.Sprintf("SELECT attribute, content FROM attributes WHERE accession = '%s';", cell.AC.Pri)

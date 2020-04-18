@@ -25,7 +25,7 @@ func GetReleaseInfo(c *gin.Context) {
 		InternalServerError(c)
 		return
 	}
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 	Render(c, indent, rel)
 }
 
@@ -36,7 +36,7 @@ func ListTerminologies(c *gin.Context) {
 		InternalServerError(c)
 		return
 	}
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 	Render(c, indent, terms)
 }
 
@@ -46,7 +46,7 @@ func ListCells(c *gin.Context) {
 
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	perPage, _ := strconv.Atoi(c.DefaultQuery("per_page", "10"))
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 
 	total, err := totalCells()
 	if err != nil {
@@ -77,7 +77,7 @@ func ListCells(c *gin.Context) {
 // FindCell handles GET requests for /cell-lines/:id.
 func FindCell(c *gin.Context) {
 	var cell Cell
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 
 	cell.ID = c.Param("id")
 	err := cell.Find()
@@ -99,7 +99,7 @@ func ListReferences(c *gin.Context) {
 
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	perPage, _ := strconv.Atoi(c.DefaultQuery("per_page", "10"))
-	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "false"))
+	indent, _ := strconv.ParseBool(c.DefaultQuery("indent", "true"))
 
 	total, err := totalRefs()
 	if err != nil {

@@ -24,10 +24,11 @@ IGNORE 1 LINES;
 # ==============================================================================
 CREATE TABLE terminologies(
     id INT AUTO_INCREMENT primary key NOT NULL,
+    abbreviation VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    source VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    url VARCHAR(255) NOT NULL
+    server VARCHAR(255) NOT NULL,
+    db_url VARCHAR(255) NOT NULL,
+    cat VARCHAR(255) NOT NULL
 );
 LOAD DATA LOCAL INFILE '../data/csv/terminologies.csv' INTO TABLE terminologies
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
@@ -37,17 +38,17 @@ CREATE TABLE cells(
     acp VARCHAR(20) primary key NOT NULL,
     id VARCHAR(255) NOT NULL,
     acs VARCHAR(500),
-    sy VARCHAR(1000),
+    sy VARCHAR(500),
     sx VARCHAR(255),
     ca VARCHAR(255),
     dt VARCHAR(255),
     INDEX id (id),
     INDEX acs (acs),
-    INDEX sy (sy),
     INDEX sx (sx),
-    INDEX ca (ca)
+    INDEX ca (ca),
+    INDEX sy (sy)
 );
-LOAD DATA LOCAL INFILE '../data/csv/cells.csv' INTO TABLE cells
+LOAD DATA LOCAL INFILE '../data/csv/cell_lines.csv' INTO TABLE cells
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 IGNORE 1 LINES;
 # ==============================================================================
@@ -70,7 +71,7 @@ CREATE TABLE refs(
     rt VARCHAR(500) NOT NULL,
     rl VARCHAR(200) NOT NULL
 );
-LOAD DATA LOCAL INFILE '../data/csv/refs.csv' INTO TABLE refs
+LOAD DATA LOCAL INFILE '../data/csv/references.csv' INTO TABLE refs
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 IGNORE 1 LINES;
 # ==============================================================================
