@@ -68,7 +68,7 @@
     (define ac (cadr (string-split (read-line in) "   ")))
     (let loop ([row row])
       (define line (string-split (read-line in) "   "))
-      (cond
+      (cond 
         [(equal? (car line) "//")
          (write-attrs-to-csv in row)]
         [(or (equal? (car line) "AS")
